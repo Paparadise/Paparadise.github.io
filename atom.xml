@@ -1,28 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom">
   <title>Paparadise</title>
   <id>https://github.com/Paparadise/Paparadise.github.io.git</id>
-  <updated>2017-04-07T13:19:15+08:00</updated>
+  <updated>2017-04-07T14:24:15+08:00</updated>
   <subtitle>不要看轻前端职业，更不要看轻自己</subtitle>
   <link href="https://github.com/Paparadise/Paparadise.github.io.git"></link>
   <author>
     <name>Paparadise</name>
   </author>
   <entry>
-    <title>简洁的静态博客构建工具 —— 纸小墨（InkPaper）</title>
-    <updated>2016-07-11T17:00:00+08:00</updated>
-    <id>tag:github.com,2016-07-11:/Paparadise/Paparadise.github.io.git/ink-blog-tool.html</id>
-    <content type="html">&lt;p&gt;纸小墨（InkPaper）是一个GO语言编写的开源静态博客构建工具，可以快速搭建博客网站。它无依赖跨平台，配置简单构建快速，注重简洁易用与更优雅的排版。&lt;/p&gt;&#xA;</content>
-    <link href="https://github.com/Paparadise/Paparadise.github.io.git/ink-blog-tool.html"></link>
-    <author>
-      <name>Paparadise</name>
-    </author>
-  </entry>
-  <entry>
-    <title>An Elegant Static Blog Generator —— InkPaper</title>
-    <updated>2016-07-11T17:00:00+08:00</updated>
-    <id>tag:github.com,2016-07-11:/Paparadise/Paparadise.github.io.git/ink-blog-tool-en.html</id>
-    <content type="html">&lt;p&gt;InkPaper is an static blog generator developed by Golang, No dependencies, Cross platform, Easy use, Fast build, Elegant theme.&lt;/p&gt;&#xA;</content>
-    <link href="https://github.com/Paparadise/Paparadise.github.io.git/ink-blog-tool-en.html"></link>
+    <title>数组、字符串操作方法</title>
+    <updated>2014-03-01T18:00:00+08:00</updated>
+    <id>tag:github.com,2014-03-01:/Paparadise/Paparadise.github.io.git/数组、字符串操作方法.html</id>
+    <content type="html">&lt;p&gt;简单总结了JS中数组和字符串的操作方法。&lt;/p&gt;&#xA;</content>
+    <link href="https://github.com/Paparadise/Paparadise.github.io.git/数组、字符串操作方法.html"></link>
     <author>
       <name>Paparadise</name>
     </author>
