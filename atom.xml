@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom">
   <title>Paparadise</title>
   <id>https://github.com/Paparadise/Paparadise.github.io.git</id>
-  <updated>2017-04-07T14:50:54+08:00</updated>
+  <updated>2017-04-07T20:44:37+08:00</updated>
   <subtitle>不要看轻前端职业，更不要看轻自己</subtitle>
   <link href="https://github.com/Paparadise/Paparadise.github.io.git"></link>
   <author>
     <name>Paparadise</name>
   </author>
+  <entry>
+    <title>原型链结构图</title>
+    <updated>2014-05-01T18:00:00+08:00</updated>
+    <id>tag:github.com,2014-05-01:/Paparadise/Paparadise.github.io.git/原型链结构图.html</id>
+    <content type="html">&lt;p&gt;比较详细的原型链结构图。&lt;/p&gt;&#xA;</content>
+    <link href="https://github.com/Paparadise/Paparadise.github.io.git/原型链结构图.html"></link>
+    <author>
+      <name>Paparadise</name>
+    </author>
+  </entry>
   <entry>
     <title>数组、字符串操作方法</title>
     <updated>2014-03-01T18:00:00+08:00</updated>
