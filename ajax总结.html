@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1, minimum-scale=1, maximum-scale=1">
+<meta name="renderer" content="webkit">
+<meta name="google" value="notranslate">
+<meta name="robots" content="index,follow">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Paparadise">
+<meta name="twitter:description" content="不要看轻前端职业，更不要看轻自己">
+<meta name="twitter:image:src" content="https://github.com/Paparadise/Paparadise.github.io.git/images/avatar1.jpg">
+
+<meta property="og:url" content="https://github.com/Paparadise/Paparadise.github.io.git">
+<meta property="og:title" content="Paparadise">
+<meta property="og:description" content="不要看轻前端职业，更不要看轻自己">
+<meta property="og:site_name" content="Paparadise">
+<meta property="og:image" content="https://github.com/Paparadise/Paparadise.github.io.git/images/avatar1.jpg">
+<meta property="og:type" content="website">
+<meta name="robots" content="noodp">
+
+<meta itemprop="name" content="Paparadise">
+<meta itemprop="description" content="不要看轻前端职业，更不要看轻自己">
+<meta itemprop="image" content="https://github.com/Paparadise/Paparadise.github.io.git/images/avatar1.jpg">
+
+<link rel="canonical" href="https://github.com/Paparadise/Paparadise.github.io.git">
+
+<link rel="shortcut icon" href="/favicon.png">
+<link rel="apple-itouch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/bundle/index.css">
+<script type="text/javascript">
+    var timeSinceLang = {
+        year: '年前',
+        month: '个月前',
+        day: '天前',
+        hour: '小时前',
+        minute: '分钟前',
+        second: '秒前'
+    };
+    var root = '';
+</script>
+
+<script type="text/javascript">
+    var conn, reloadTimer, connectTimer;
+    var connect = function() {
+        conn = new WebSocket('ws://' + location.host + '/live');
+        conn.onmessage = function(event) {
+            if (event.data === 'change') {
+                if (reloadTimer) clearTimeout(reloadTimer);
+                reloadTimer = setTimeout(function() {
+                    window.location.reload();
+                }, 200);
+            }
+        };
+        conn.onclose = function() {
+            if (connectTimer) clearTimeout(connectTimer);
+            connectTimer = setTimeout(function() {
+                connect();
+            }, 1000);
+        };
+    };
+    connect();
+</script>
+
+
+        <meta name="keywords" content="Javascript,Ajax,">
+        <meta name="description" content="Ajax总结">
+        <meta name="author" content="Paparadise">
+        <title>Ajax总结</title>
+    </head>
+    <body>
+        <article class="container">
+            <header class="header-wrap">
+  <a class="index" href="/">
+    <img class="logo" src="/images/avatar1.jpg" />
+    Paparadise
+  </a>
+  <ul class="menu">
+      <li class="menu-item"><a href="/archive.html">归档</a></li>
+      <li class="menu-item"><a href="/tag.html">标签</a></li>
+      <li class="menu-item"><a href="/atom.xml">订阅</a></li>
+  </ul>
+</header>
+
+            <article class="main article">
+                <h1 class="title">Ajax总结</h1>
+                <section class="info">
+                    <span class="avatar" style="background-image: url(/images/avatar1.jpg);"></span>
+                    <a class="name" href="/about.me.html">Paparadise</a>
+                    
+                    <span class="date" data-time="1459648800"><span class="from"></span></span>
+                    
+                    <span class="tags"><a class="tag" href="/tag/Javascript/index.html">Javascript</a><a class="tag" href="/tag/Ajax/index.html">Ajax</a></span>
+                </section>
+                <article class="content"><ul>
+<li><a href="#什么是Ajax">什么是Ajax</a></li>
+<li><a href="#隐藏帧技术">隐藏帧技术</a></li>
+<li><a href="#Ajax请求步骤">Ajax请求步骤</a></li>
+<li><a href="#jQuery的ajax方法">jQuery的ajax方法</a></li>
+<li><a href="#json数据解析">json数据解析</a></li>
+</ul>
+
+<h3>什么是Ajax</h3>
+
+<p>在不刷新页面的情况下，浏览器悄悄地、异步地向服务器发出HTTP请求。服务器收到请求后，传回新的格式化数据回来（通常是JSON）。浏览器解析JSON，通过DOM将新数据呈递显示，页面仅局部刷新。</p>
+
+<h3>隐藏帧技术</h3>
+
+<p>在没有Ajax之前，可以通过隐藏的iframe标签达到异步加载的效果。</p>
+
+<pre><code>html部份：
+&lt;div&gt;
+    &lt;form action=&quot;./iframe.php&quot; method=&quot;post&quot; target=&quot;myframe&quot;&gt;
+        用户名：&lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;&lt;span id=&quot;info&quot;&gt;&lt;/span&gt;&lt;br&gt;
+        密码：&lt;input type=&quot;text&quot; name=&quot;password&quot;&gt;
+        &lt;input type=&quot;submit&quot; value=&quot;登录&quot;&gt;
+    &lt;/form&gt;
+&lt;/div&gt;
+&lt;iframe width=&quot;0&quot; height=&quot;0&quot;  frameborder=&quot;0&quot; name=&quot;myframe&quot;&gt;&lt;/iframe&gt;
+
+后台php部份：
+&lt;?php 
+$uname = $_POST['username'];
+$pw = $_POST['password'];
+
+if($uname == 'admin' &amp;&amp; $pw == '123'){ ?&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+        parent.document.getElementById('info').innerHTML = '登录成功';
+    &lt;/script&gt;
+&lt;?php }else{ ?&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+        parent.document.getElementById('info').innerHTML = '登录失败';
+    &lt;/script&gt;
+&lt;?php } ?&gt;
+
+</code></pre>
+
+<p>页面刷新了，刷新的虽然只是iframe子页面，这种做法是实现了页面的局部更新，但是没有异步来实现。</p>
+
+<h3>Ajax请求步骤</h3>
+
+<pre><code>1. 创建XMLHttpRequest对象
+var xhr = null;
+window.XMLHttpRequest 
+? xhr = new XMLHttpRequest(); //FF 
+: xhr = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;) //IE下
+
+2. 准备发送
+/*
+参数一：请求方式（get获取数据；post提交数据）
+参数二：请求地址
+参数三：同步或者异步标志位，默认是true表示异步，false表示同步
+
+如果是get请求那么请求参数必须在url中传递
+encodeURI()用来对中文参数进行编码，防止乱码
+
+post请求参数通过send传递，不需要通过encodeURI()转码
+必须设置请求头信息
+*/
+
+//Get方式
+var param = 'username=' + uname + 'password=' + pw;
+xhr.open('get', '03get.php?' + encodeURI(param), true);
+xhr.setRequestHeader(&quot;If-Modified-Since&quot;,&quot;0&quot;)；//设置浏览器不使用缓存(可以不加)
+
+/*
+//Post方式
+xhr.open(&quot;post&quot;,&quot;test.ashx&quot;,true);
+xhr.setRequestHeader(&quot;Content-Type&quot;,&quot;application/x-www-form-urlencoded&quot;);
+*/
+
+3. 发送数据
+//Get方式发送数据
+xhr.send(null);//异步对象发送请求
+
+/*
+//以post方式发送数据
+xhr.send(&quot;username=&quot; + uname + &quot;&amp;password=&quot; + pw); 
+*/
+
+4. 指定回调函数
+//这个回调函数主要用来检测服务器是否把数据返回给异步对象
+xhr.onreadystatechange = function() {
+//readyState属性指出了XMLHttpRequest对象在发送/接收数据过程中所处的几个状态。XMLHttpRequest对象会经历5种不同的状态。
+//0：未初始化。对象已经创建，但还未初始化，即还没调用open方法；
+//1：已打开。对象已经创建并初始化，但还未调用send方法；
+//2：已发送。已经调用send 方法，但该对象正在等待状态码和头的返回；
+//3：正在接收。已经接收了部分数据，但还不能使用该对象的属性和方法，因为状态和响应头不完整；
+//4：已加载。所有数据接收完毕
+    if (xhr.readyState == 4) { //检测服务器返回的响应报文的状态码是否为200
+        if (xhr.status == 200) { //当readyState为4的时候，就会有一个属性产生 --- xhr.status表示的是请求的文件的状态码
+            alert(xhr.responseText);
+            /*
+            1**  ----  消息
+            2**  ----  代码请求成功
+            3**  ----  重定向
+            4**  ----  请求错误
+            5**  ----  服务器错误
+            6**  ----  其它
+            */
+        }
+    }
+}
+
+</code></pre>
+
+<h3>jQuery的ajax方法</h3>
+
+<pre><code>$.ajax({
+    type: &quot;method&quot;,
+    url: &quot;url&quot;,
+    data: &quot;data&quot;,
+    dataType: &quot;dataType&quot;,
+    success: function (response) {
+        console.log(response);
+    }
+});
+
+$.get(&quot;url&quot;, data,
+    function (data, textStatus, jqXHR) {
+        
+    },
+    &quot;dataType&quot;
+);
+
+$.post(&quot;url&quot;, data,
+    function (data, textStatus, jqXHR) {
+        
+    },
+    &quot;dataType&quot;
+);
+</code></pre>
+
+<h3>json数据解析</h3>
+
+<ul>
+<li><p>把JSON文本转换为JavaScript对象</p>
+
+<blockquote>
+<p>JSON 最常见的用法之一，是从 web 服务器上读取 JSON 数据（作为文件或作为 HttpRequest），将 JSON 数据转换为 JavaScript 对象，然后在网页中使用该数据。</p>
+</blockquote></li>
+
+<li><p>为什么要转换</p>
+
+<blockquote>
+<p>在数据传输过程中，json是以文本，即字符串的形式传递的，而JS操作的是JSON对象，所以，JSON对象和JSON字符串之间的相互转换是关键。</p>
+</blockquote></li>
+
+<li><p>转换的方法</p>
+
+<ul>
+<li>JSON_parse()       &mdash; 把json形式的字符串转成对象</li>
+<li>JSON_stringify()   &mdash; 把对象转成字符串</li>
+<li>eval()             &mdash; 把字符串解析成JS代码并执行</li>
+</ul></li>
+
+<li><p>php开发json形式数据接口</p>
+
+<ul>
+<li>json_encode() &mdash; 把数组转换成JSON形式的字符串</li>
+</ul></li>
+</ul>
+</article>
+                <section class="author">
+                    <div class="avatar" style="background-image: url(/images/avatar1.jpg);"></div>
+                    <a class="name" href="/about.me.html">Paparadise</a>
+                    <div class="intro">不要看轻前端职业，更不要看轻自己</div>
+                </section>
+                <section class="recommend">
+                    
+                    
+                    <section class="nav next">
+                        <div class="head">下篇文章</div>
+                        <a class="link" href="/gulp%e4%bd%bf%e7%94%a8%e6%80%bb%e7%bb%93.html">gulp总结</a>
+                    </section>
+                    
+                </section>
+                
+    <section id="disqus_thread"></section>
+    <script type="text/javascript">
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//Paparadise.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+            </article>
+        </article>
+        <footer class="footer">
+    <span class="copyright">
+        Paparadise ©
+        <script type="text/javascript">
+            document.write(new Date().getFullYear());
+        </script>
+    </span>
+    <span class="publish">Powered by <a href="http://www.chole.io/" target="_blank">Ink</a></span>
+</footer>
+
+        <script src="/bundle/index.js"></script>
+    </body>
+</html>
