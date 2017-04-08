@@ -1,12 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom">
   <title>Paparadise</title>
   <id>https://github.com/Paparadise/Paparadise.github.io.git</id>
-  <updated>2017-04-08T08:47:38+08:00</updated>
+  <updated>2017-04-08T14:11:57+08:00</updated>
   <subtitle>不要看轻前端职业，更不要看轻自己</subtitle>
   <link href="https://github.com/Paparadise/Paparadise.github.io.git"></link>
   <author>
     <name>Paparadise</name>
   </author>
+  <entry>
+    <title>gulp总结</title>
+    <updated>2016-04-03T10:00:00+08:00</updated>
+    <id>tag:github.com,2016-04-03:/Paparadise/Paparadise.github.io.git/gulp使用总结.html</id>
+    <content type="html">&lt;p&gt;gulp是一个用来前端的工作流构建工具。&lt;/p&gt;&#xA;</content>
+    <link href="https://github.com/Paparadise/Paparadise.github.io.git/gulp使用总结.html"></link>
+    <author>
+      <name>Paparadise</name>
+    </author>
+  </entry>
+  <entry>
+    <title>vue cli使用总结</title>
+    <updated>2016-04-03T10:00:00+08:00</updated>
+    <id>tag:github.com,2016-04-03:/Paparadise/Paparadise.github.io.git/vue cli使用总结.html</id>
+    <content type="html">&lt;p&gt;vue项目脚手架&lt;/p&gt;&#xA;</content>
+    <link href="https://github.com/Paparadise/Paparadise.github.io.git/vue cli使用总结.html"></link>
+    <author>
+      <name>Paparadise</name>
+    </author>
+  </entry>
+  <entry>
+    <title>vue简明教程</title>
+    <updated>2016-04-03T10:00:00+08:00</updated>
+    <id>tag:github.com,2016-04-03:/Paparadise/Paparadise.github.io.git/vue简明教程.html</id>
+    <content type="html">&lt;p&gt;优雅、简洁的前端框架&lt;/p&gt;&#xA;</content>
+    <link href="https://github.com/Paparadise/Paparadise.github.io.git/vue简明教程.html"></link>
+    <author>
+      <name>Paparadise</name>
+    </author>
+  </entry>
+  <entry>
+    <title>npm总结</title>
+    <updated>2016-04-02T18:00:00+08:00</updated>
+    <id>tag:github.com,2016-04-02:/Paparadise/Paparadise.github.io.git/npm总结.html</id>
+    <content type="html">&lt;p&gt;npm可以作为前端库(框架)的下载工具，也可以作为Node.js项目的包管理工具。&lt;/p&gt;&#xA;</content>
+    <link href="https://github.com/Paparadise/Paparadise.github.io.git/npm总结.html"></link>
+    <author>
+      <name>Paparadise</name>
+    </author>
+  </entry>
   <entry>
     <title>原型链结构图</title>
     <updated>2014-05-01T18:00:00+08:00</updated>

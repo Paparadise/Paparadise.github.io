@@ -44,10 +44,31 @@
     var root = '';
 </script>
 
+<script type="text/javascript">
+    var conn, reloadTimer, connectTimer;
+    var connect = function() {
+        conn = new WebSocket('ws://' + location.host + '/live');
+        conn.onmessage = function(event) {
+            if (event.data === 'change') {
+                if (reloadTimer) clearTimeout(reloadTimer);
+                reloadTimer = setTimeout(function() {
+                    window.location.reload();
+                }, 200);
+            }
+        };
+        conn.onclose = function() {
+            if (connectTimer) clearTimeout(connectTimer);
+            connectTimer = setTimeout(function() {
+                connect();
+            }, 1000);
+        };
+    };
+    connect();
+</script>
 
-        <meta name="keywords" content="Paparadise, 不要看轻前端职业，更不要看轻自己">
+
+        <meta name="keywords" content="不要看轻前端职业，更不要看轻自己">
         <meta name="description" content="不要看轻前端职业，更不要看轻自己">
-        <meta name="author" content="">
         <title>Paparadise</title>
     </head>
     <body>
@@ -64,62 +85,39 @@
   </ul>
 </header>
 
-            <article class="main archive">
-                <header class="site">
-                    <h1 class="title">Paparadise</h1>
-                    <h2 class="subtitle">不要看轻前端职业，更不要看轻自己</h2>
-                </header>
-                <header class="header">
-                    <span class="title">归档 -</span>
-                    <span class="subtitle">6 篇文章</span>
-                </header>
-                <ul class="archive-list">
+            <article class="main page">
+                <header class="header site">
                     
-                    <li class="archive-item">
-                        <div class="archive-year">2016</div>
-                        <ul class="article-list">
-                            
-                            <li class="article-item">
-                                <span class="date">2016-04-03</span>
-                                <a href="gulp%e4%bd%bf%e7%94%a8%e6%80%bb%e7%bb%93.html">gulp总结</a>
-                            </li>
-                            
-                            <li class="article-item">
-                                <span class="date">2016-04-03</span>
-                                <a href="vue%20cli%e4%bd%bf%e7%94%a8%e6%80%bb%e7%bb%93.html">vue cli使用总结</a>
-                            </li>
-                            
-                            <li class="article-item">
-                                <span class="date">2016-04-03</span>
-                                <a href="vue%e7%ae%80%e6%98%8e%e6%95%99%e7%a8%8b.html">vue简明教程</a>
-                            </li>
-                            
-                            <li class="article-item">
-                                <span class="date">2016-04-02</span>
-                                <a href="npm%e6%80%bb%e7%bb%93.html">npm总结</a>
-                            </li>
-                            
-                        </ul>
-                    </li>
+                        <img class="logo" src="/images/avatar1.jpg" />
+                        <h1 class="tag">前端框架</h1>
+                        <h2 class="tag-sub">1 篇文章</h2>
                     
-                    <li class="archive-item">
-                        <div class="archive-year">2014</div>
-                        <ul class="article-list">
+                </header>
+                <ul class="article-list">
+                    
+                    <li class="article">
+                        <a class="title" href="/vue%e7%ae%80%e6%98%8e%e6%95%99%e7%a8%8b.html">vue简明教程</a>
+                        <div class="cover" style="background-image:url(/images/vue.jpg);"></div>
+                        <section class="preview content"><p>优雅、简洁的前端框架</p>
+</section>
+                        <section class="info">
+                            <span class="avatar" style="background-image: url(/images/avatar1.jpg);"></span>
+                            <a class="name" href="/about.me.html">Paparadise</a>
                             
-                            <li class="article-item">
-                                <span class="date">2014-05-01</span>
-                                <a href="%e5%8e%9f%e5%9e%8b%e9%93%be%e7%bb%93%e6%9e%84%e5%9b%be.html">原型链结构图</a>
-                            </li>
+                            <span class="date" data-time="1459648800"><span class="from"></span></span>
                             
-                            <li class="article-item">
-                                <span class="date">2014-03-01</span>
-                                <a href="%e6%95%b0%e7%bb%84%e3%80%81%e5%ad%97%e7%ac%a6%e4%b8%b2%e6%93%8d%e4%bd%9c%e6%96%b9%e6%b3%95.html">数组、字符串操作方法</a>
-                            </li>
-                            
-                        </ul>
+                            <span class="tags">
+                            <a class="tag" href="/tag/%e5%89%8d%e7%ab%af%e6%a1%86%e6%9e%b6/index.html">前端框架</a>
+                            </span>
+                        </section>
                     </li>
                     
                 </ul>
+                <section class="page-nav">
+                    
+                    
+                    
+                </section>
             </article>
         </article>
         <footer class="footer">
