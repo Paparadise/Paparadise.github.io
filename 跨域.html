@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1, minimum-scale=1, maximum-scale=1">
+<meta name="renderer" content="webkit">
+<meta name="google" value="notranslate">
+<meta name="robots" content="index,follow">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Paparadise">
+<meta name="twitter:description" content="不要看轻前端职业，更不要看轻自己">
+<meta name="twitter:image:src" content="https://github.com/Paparadise/Paparadise.github.io.git/images/avatar1.jpg">
+
+<meta property="og:url" content="https://github.com/Paparadise/Paparadise.github.io.git">
+<meta property="og:title" content="Paparadise">
+<meta property="og:description" content="不要看轻前端职业，更不要看轻自己">
+<meta property="og:site_name" content="Paparadise">
+<meta property="og:image" content="https://github.com/Paparadise/Paparadise.github.io.git/images/avatar1.jpg">
+<meta property="og:type" content="website">
+<meta name="robots" content="noodp">
+
+<meta itemprop="name" content="Paparadise">
+<meta itemprop="description" content="不要看轻前端职业，更不要看轻自己">
+<meta itemprop="image" content="https://github.com/Paparadise/Paparadise.github.io.git/images/avatar1.jpg">
+
+<link rel="canonical" href="https://github.com/Paparadise/Paparadise.github.io.git">
+
+<link rel="shortcut icon" href="/favicon.png">
+<link rel="apple-itouch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/bundle/index.css">
+<script type="text/javascript">
+    var timeSinceLang = {
+        year: '年前',
+        month: '个月前',
+        day: '天前',
+        hour: '小时前',
+        minute: '分钟前',
+        second: '秒前'
+    };
+    var root = '';
+</script>
+
+<script type="text/javascript">
+    var conn, reloadTimer, connectTimer;
+    var connect = function() {
+        conn = new WebSocket('ws://' + location.host + '/live');
+        conn.onmessage = function(event) {
+            if (event.data === 'change') {
+                if (reloadTimer) clearTimeout(reloadTimer);
+                reloadTimer = setTimeout(function() {
+                    window.location.reload();
+                }, 200);
+            }
+        };
+        conn.onclose = function() {
+            if (connectTimer) clearTimeout(connectTimer);
+            connectTimer = setTimeout(function() {
+                connect();
+            }, 1000);
+        };
+    };
+    connect();
+</script>
+
+
+        <meta name="keywords" content="Javascript,Ajax,Jsonp,">
+        <meta name="description" content="跨域">
+        <meta name="author" content="Paparadise">
+        <title>跨域</title>
+    </head>
+    <body>
+        <article class="container">
+            <header class="header-wrap">
+  <a class="index" href="/">
+    <img class="logo" src="/images/avatar1.jpg" />
+    Paparadise
+  </a>
+  <ul class="menu">
+      <li class="menu-item"><a href="/archive.html">归档</a></li>
+      <li class="menu-item"><a href="/tag.html">标签</a></li>
+      <li class="menu-item"><a href="/atom.xml">订阅</a></li>
+  </ul>
+</header>
+
+            <article class="main article">
+                <h1 class="title">跨域</h1>
+                <section class="info">
+                    <span class="avatar" style="background-image: url(/images/avatar1.jpg);"></span>
+                    <a class="name" href="/about.me.html">Paparadise</a>
+                    
+                    <span class="date" data-time="1456826400"><span class="from"></span></span>
+                    
+                    <span class="tags"><a class="tag" href="/tag/Javascript/index.html">Javascript</a><a class="tag" href="/tag/Ajax/index.html">Ajax</a><a class="tag" href="/tag/Jsonp/index.html">Jsonp</a></span>
+                </section>
+                <article class="content"><ul>
+<li><a href="#同源策略">同源策略</a>
+
+<ul>
+<li><a href="#什么是跨域">什么是跨域</a></li>
+<li><a href="#跨域解决方案">跨域解决方案</a></li>
+</ul></li>
+<li><a href="#JSONP原理">JSONP原理</a>
+
+<ul>
+<li><a href="#JSONP的原理（1）">JSONP的原理（1）</a></li>
+<li><a href="#JSONP的原理（2）">JSONP的原理（2）</a></li>
+<li><a href="#JSONP的原理（3）">JSONP的原理（3）</a></li>
+</ul></li>
+<li><a href="#JSONP的使用">JSONP的使用</a>
+
+<ul>
+<li><a href="#Ajax请求JSONP的封装">Ajax请求JSONP的封装</a></li>
+</ul></li>
+</ul>
+
+<h3>同源策略</h3>
+
+<ol>
+<li><p>什么是跨域</p>
+
+<pre><code>同源策略是浏览器的一种安全策略，所谓同源指的是请求URL地址中的协议、域名和端口号都相同，
+只要其中之一不相同就是跨域。
+同源策略主要是为了保证浏览器的安全性
+在同源策略下，浏览器不允许Ajax跨域获取服务器数据
+
+说简单点：跨域是指从一个域名的网页去请求另一个域名的资源。
+只要协议、域名、端口有任何一个的不同，就被当作是跨域。 
+</code></pre></li>
+
+<li><p>跨域解决方案</p>
+
+<pre><code>1、jsonp，
+2、document.domain + iframe
+3、location.hash + iframe
+4、window.name + iframe
+5、window.postMessage
+6、flash 等第三方插件
+
+99%的公司都在使用jsonp。
+
+注：前端解决跨域问题的8种方案
+http://www.cnblogs.com/JChen666/p/3399951.html
+</code></pre></li>
+</ol>
+
+<h3>JSONP原理</h3>
+
+<ol>
+<li><p>JSONP的原理（1）</p>
+
+<pre><code>静态script标签的src属性进行跨域请求
+    如果使用src这种方法进行跨域的话，一定要把这段获取数据的代码上面先行加载，
+    使用数据的方法放在后加载，这种方法的缺点就是非常的不灵活。
+这种方法已经极少使用，了解即可
+
+利用script标签的跨域能力，这就是jsonp的基础。
+利用js构造一个script标签，把json的url赋给script的scr属性，
+把这个script插入到dom里，让浏览器去获取。
+</code></pre></li>
+
+<li><p>JSONP的原理（2）</p>
+
+<pre><code>动态创建script标签，通过标签的src属性发送请求
+动态创建script标签发出去的请求是异步请求
+服务器响应的内容【函数调用】
+</code></pre></li>
+
+<li><p>JSONP的原理（3）</p>
+
+<pre><code>1、jsonp的本质：动态创建script标签，然后通过它src属性发送跨域请求，
+然后服务器响应的数据格式为【函数调用（foo实参）】
+所以在发送请求之前必须显示先声明一个函数，并且函数的名字与参数中传递的名字要一致，
+这里声明的函数是由服务器响应的内容，（实际就是一段js代码-函数调用）来调用
+
+2、注意：ajax和jsonp其实本质上是不同的东西。
+ajax的核心是通过XmlHttpRequest获取非本页内容，
+而jsonp的核心则是动态添加&lt;script&gt;标签来调用服务器提供的js脚本。
+
+3、贺师俊 --- JSONP 的工作原理是什么
+就是利用&lt;script&gt;标签没有跨域限制的“漏洞”（历史遗迹啊）来达到与第三方通讯的目的。
+当需要通讯时，本站脚本创建一个&lt;script&gt;元素，地址指向第三方的API网址，
+    形如： &lt;script src=&quot;http://www.example.net/api?param1=1&amp;param2=2&quot;&gt;&lt;/script&gt; 
+并提供一个回调函数来接收数据（函数名可约定，或通过地址参数传递）。 
+第三方产生的响应为json数据的包装（故称之为jsonp，即json padding），形如： 
+    callback({&quot;name&quot;:&quot;hax&quot;,&quot;gender&quot;:&quot;Male&quot;}) 
+这样浏览器会调用callback函数，并传递解析后json对象作为参数。
+本站脚本可在callback函数里处理所传入的数据。 
+
+4、定义函数，一定要写在调用JSONP之前。也就是，调用任何外部js，都没有函数声明头的提升。
+</code></pre></li>
+</ol>
+
+<h3>JSONP的使用</h3>
+
+<ol>
+<li><p>Ajax请求JSONP的封装</p>
+
+<pre><code>function ajax4Jsonp(obj) {
+    // jsonp仅仅支持get请求
+    var defaults = {
+        url: '#',
+        dataType: 'jsonp',
+        jsonp: 'callback',
+        data: {},
+        success: function(data) {
+            console.log(data);
+        }
+    }
+
+    for (var key in obj) {
+        defaults[key] = obj[key];
+    }
+    // 这里是默认的回调函数名称
+    // expando: &quot;jQuery&quot; + ( version + Math.random() ).replace( /\D/g, &quot;&quot; ),
+    var cbName = 'jQuery' + ('1.11.1' + Math.random()).replace(/\D/g, &quot;&quot;) + '_' + (new Date().getTime());
+    if (defaults.jsonpCallback) {
+        cbName = defaults.jsonpCallback;
+    }
+
+    // 这里就是回调函数，调用方式：服务器响应内容来调用
+    // 向window对象中添加了一个方法，方法名称是变量cbName的值
+    window[cbName] = function(data) {
+        defaults.success(data); //这里success的data是实参
+    }
+
+    var param = '';
+    for (var attr in defaults.data) {
+        param += attr + '=' + defaults.data[attr] + '&amp;';
+    }
+    if (param) {
+        param = param.substring(0, param.length - 1);
+        param = '&amp;' + param;
+    }
+    var script = document.createElement('script');
+    script.src = defaults.url + '?' + defaults.jsonp + '=' + cbName + param;
+    var head = document.getElementsByTagName('head')[0];
+    head.appendChild(script);
+
+    // abc({&quot;username&quot;:&quot;zhangsan&quot;,&quot;password&quot;:&quot;123&quot;})
+}
+</code></pre></li>
+
+<li><p>jQuery的Ajax请求JSONP的使用</p>
+
+<pre><code>$.ajax({
+    url: &quot;url&quot;,
+    data: &quot;data&quot;,
+    dataType: &quot;jsonp&quot;,
+    success: function (response) {
+
+    }
+});
+</code></pre></li>
+</ol>
+</article>
+                <section class="author">
+                    <div class="avatar" style="background-image: url(/images/avatar1.jpg);"></div>
+                    <a class="name" href="/about.me.html">Paparadise</a>
+                    <div class="intro">不要看轻前端职业，更不要看轻自己</div>
+                </section>
+                <section class="recommend">
+                    
+                    <section class="nav prev more">
+                        <div class="head">上篇文章</div>
+                        <a class="link" href="/npm%e6%80%bb%e7%bb%93.html">npm总结</a>
+                    </section>
+                    
+                    
+                    <section class="nav next more">
+                        <div class="head">下篇文章</div>
+                        <a class="link" href="/%e5%8e%9f%e5%9e%8b%e9%93%be%e7%bb%93%e6%9e%84%e5%9b%be.html">原型链结构图</a>
+                    </section>
+                    
+                </section>
+                
+    <section id="disqus_thread"></section>
+    <script type="text/javascript">
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//Paparadise.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+            </article>
+        </article>
+        <footer class="footer">
+    <span class="copyright">
+        Paparadise ©
+        <script type="text/javascript">
+            document.write(new Date().getFullYear());
+        </script>
+    </span>
+    <span class="publish">Powered by <a href="http://www.chole.io/" target="_blank">Ink</a></span>
+</footer>
+
+        <script src="/bundle/index.js"></script>
+    </body>
+</html>
