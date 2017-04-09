@@ -100,6 +100,7 @@
 <li><a href="#什么是Ajax">什么是Ajax</a></li>
 <li><a href="#隐藏帧技术">隐藏帧技术</a></li>
 <li><a href="#Ajax请求步骤">Ajax请求步骤</a></li>
+<li><a href="#Ajax封装">Ajax封装</a></li>
 <li><a href="#jQuery的ajax方法">jQuery的ajax方法</a></li>
 <li><a href="#json数据解析">json数据解析</a></li>
 </ul>
@@ -206,6 +207,87 @@ xhr.onreadystatechange = function() {
     }
 }
 
+</code></pre>
+
+<h3>Ajax封装</h3>
+
+<pre><code>function myAjax(obj) {
+    var r_type = obj.type || 'GET'; //请求方式默认GET
+    var url = obj.url || ''; //请求的URL
+    var fnsuccess = obj.success; //成功回调函数
+    var fnFailed = obj.error || null; //失败回调函数
+    var data_format = obj.dataType || 'json'; //返回数据格式默认json
+    var data_info = null; //发送的数据
+    var tmp_str = '&amp;';
+    if (url == &quot;&quot;) {
+        alert('error:url is empty!');
+        return false;
+    }
+
+    //URL拼接参数
+    for (var i in obj.data) {
+        if (obj.data.hasOwnProperty(i)) {
+            if (typeof obj.data[i] !== undefined) {
+                tmp_str += i + &quot;=&quot; + obj.data[i] + &quot;&amp;&quot;;
+            }
+        }
+    }
+
+    if (r_type.toUpperCase() == &quot;GET&quot;) {
+        if (url.indexOf('?') !== -1 &amp;&amp; url.indexOf('=') !== -1) {
+            url += tmp_str.slice(0, -1); //从第一个字符串开始截取
+        } else {
+            url += '?' + tmp_str.slice(1, -1); //从第二个开始截取
+        }
+    } else { //post方式
+        data_info = tmp_str.slice(1, -1); //user=zw&amp;age=26的形式
+    }
+    tmp_str = null; //销毁变量
+    //1 创建对象
+    var xhr = null;
+    if (window.ActiveXObject) {
+        xhr = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;); //IE下
+    } else if (window.XMLHttpRequest) {
+        xhr = new XMLHttpRequest(); //FF
+    }
+
+    //2 打开连接
+    //判断是POST,GET发送请求方式
+    xhr.open(r_type.toUpperCase(), url, true);
+    if (r_type.toUpperCase() == &quot;POST&quot;) {
+        //设置响应头信息setRequestHeader();
+        xhr.setRequestHeader(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;);
+    }
+
+    //3 发送请求
+    xhr.send(data_info || null);
+    //4 服务器处理请求后给客户端，回调函数处理
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4) {
+            //对象状态码表示完成响应内容解析完成，可以在客户端调用
+            //服务器返回状态码
+            if (xhr.status == 200) {
+                //整个过程请求成功
+                //alert(xhr.responseText);
+                //接收xhr.responseText作为参数
+                if (data_format == &quot;html&quot; || data_format == &quot;json&quot;) {
+                    fnsuccess &amp;&amp; fnsuccess(xhr.responseText);
+                } else {
+                    fnsuccess &amp;&amp; fnsuccess(xhr.responseXML);
+                }
+            } else {
+                //请求失败，404表示找不到
+                //alert(&quot;error status:&quot;+xhr.status);
+                //失败调用函数
+                if (fnFailed) {
+                    fnFailed(xhr.status);
+                }
+
+            }
+        }
+
+    }
+}
 </code></pre>
 
 <h3>jQuery的ajax方法</h3>
