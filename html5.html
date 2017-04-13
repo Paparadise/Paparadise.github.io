@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1, minimum-scale=1, maximum-scale=1">
+<meta name="renderer" content="webkit">
+<meta name="google" value="notranslate">
+<meta name="robots" content="index,follow">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Paparadise">
+<meta name="twitter:description" content="不要看轻前端职业，更不要看轻自己">
+<meta name="twitter:image:src" content="https://github.com/Paparadise/Paparadise.github.io.git/images/avatar1.jpg">
+
+<meta property="og:url" content="https://github.com/Paparadise/Paparadise.github.io.git">
+<meta property="og:title" content="Paparadise">
+<meta property="og:description" content="不要看轻前端职业，更不要看轻自己">
+<meta property="og:site_name" content="Paparadise">
+<meta property="og:image" content="https://github.com/Paparadise/Paparadise.github.io.git/images/avatar1.jpg">
+<meta property="og:type" content="website">
+<meta name="robots" content="noodp">
+
+<meta itemprop="name" content="Paparadise">
+<meta itemprop="description" content="不要看轻前端职业，更不要看轻自己">
+<meta itemprop="image" content="https://github.com/Paparadise/Paparadise.github.io.git/images/avatar1.jpg">
+
+<link rel="canonical" href="https://github.com/Paparadise/Paparadise.github.io.git">
+
+<link rel="shortcut icon" href="/favicon.png">
+<link rel="apple-itouch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/bundle/index.css">
+<script type="text/javascript">
+    var timeSinceLang = {
+        year: '年前',
+        month: '个月前',
+        day: '天前',
+        hour: '小时前',
+        minute: '分钟前',
+        second: '秒前'
+    };
+    var root = '';
+</script>
+
+<script type="text/javascript">
+    var conn, reloadTimer, connectTimer;
+    var connect = function() {
+        conn = new WebSocket('ws://' + location.host + '/live');
+        conn.onmessage = function(event) {
+            if (event.data === 'change') {
+                if (reloadTimer) clearTimeout(reloadTimer);
+                reloadTimer = setTimeout(function() {
+                    window.location.reload();
+                }, 200);
+            }
+        };
+        conn.onclose = function() {
+            if (connectTimer) clearTimeout(connectTimer);
+            connectTimer = setTimeout(function() {
+                connect();
+            }, 1000);
+        };
+    };
+    connect();
+</script>
+
+
+        <meta name="keywords" content="HTML5,">
+        <meta name="description" content="HTML5">
+        <meta name="author" content="Paparadise">
+        <title>HTML5</title>
+    </head>
+    <body>
+        <article class="container">
+            <header class="header-wrap">
+  <a class="index" href="/">
+    <img class="logo" src="/images/avatar1.jpg" />
+    Paparadise
+  </a>
+  <ul class="menu">
+      <li class="menu-item"><a href="/archive.html">归档</a></li>
+      <li class="menu-item"><a href="/tag.html">标签</a></li>
+      <li class="menu-item"><a href="/atom.xml">订阅</a></li>
+  </ul>
+</header>
+
+            <article class="main article">
+                <h1 class="title">HTML5</h1>
+                <section class="info">
+                    <span class="avatar" style="background-image: url(/images/avatar1.jpg);"></span>
+                    <a class="name" href="/about.me.html">Paparadise</a>
+                    
+                    <span class="date" data-time="1444125600"><span class="from"></span></span>
+                    
+                    <span class="tags"><a class="tag" href="/tag/HTML5/index.html">HTML5</a></span>
+                </section>
+                <article class="content"><h2>HTML5</h2>
+
+<ul>
+<li><a href="#Html5的概念">Html5的概念</a></li>
+<li><a href="#Html5的兼容性（浏览器之间的兼容）">Html5的兼容性（浏览器之间的兼容）</a></li>
+<li><a href="#html5的骨架">html5的骨架</a></li>
+<li><a href="#html5新增的标签">html5新增的标签</a>
+
+<ul>
+<li><a href="#新增标签兼容问题">新增标签兼容问题</a></li>
+</ul></li>
+<li><a href="#html5新增的智能表单">html5新增的智能表单</a>
+
+<ul>
+<li><a href="#输入类型">输入类型</a></li>
+<li><a href="#表单元素">表单元素</a></li>
+<li><a href="#表单属性">表单属性</a></li>
+<li><a href="#智能感应">智能感应</a></li>
+</ul></li>
+<li><a href="#多媒体">多媒体</a></li>
+<li><a href="#JS获取元素的新方式 （重点，兼容8，以上包括8）">JS获取元素的新方式 （兼容8，以上包括8）</a></li>
+<li><a href="#JS类名操作  （移动端常用，兼容：10以上，包括10）">JS类名操作  （移动端常用，兼容：10以上，包括10）</a></li>
+<li><a href="#自定义属性">自定义属性</a></li>
+</ul>
+
+<h3>Html5的概念</h3>
+
+<ul>
+<li><p>HTML5并不仅仅只是作为HTML标记语言的一个最新版本，更重要的是它制定了Web应用开发的一系列标准，成为第一个将Web做为应用开发平台的HTML语言。</p></li>
+
+<li><p>HTML5定义了一系列新元素，如新语义标签、智能表单、多媒体标签等，可以帮助开发者创建丰富的互联网应用，还提供了一系列Javascript API，如地理定位、重力感应、硬件访问等，可以在浏览器内实现类原生应用，甚至结合Canvas我们可开发网页版游戏，同时结合CSS3的过渡、转换、动画等特性，可以极大的增强用户体验，提升开发功能的可应用性。</p></li>
+
+<li><p>我们日常讨论的H5其实是一个泛称，它指的是由HTML5 + CSS3 + Javascript等技术组合而成的一个应用开发平台。</p></li>
+</ul>
+
+<h3>Html5的兼容性（浏览器之间的兼容）</h3>
+
+<ul>
+<li>并不是所有的html5都是IE9就兼容的，有一些属性是需要IE10，等更高级的浏览器才能兼容，不过html5更多运用在移动端方面，因为移动端搭载的浏览器都比较高级！后面的css3相对来说应用的会更广泛一些
+<br /></li>
+</ul>
+
+<h3>html5的骨架</h3>
+
+<blockquote>
+<p>html5骨架是没有兼容性问题</p>
+</blockquote>
+
+<pre><code>1  &lt;!DOCTYPE html&gt;
+2  &lt;html lang=&quot;en&quot;&gt;
+3  &lt;head&gt;
+4  	&lt;meta charset=&quot;UTF-8&quot;&gt;
+5  	&lt;title&gt;Document&lt;/title&gt;
+6  &lt;/head&gt;
+7  &lt;body&gt;
+8  &lt;/body&gt;
+9  &lt;/html&gt;
+</code></pre>
+
+<h3>html5新增的标签</h3>
+
+<ol>
+<li><p>新增的6大结构标签：
+（1）header  （2）nav （3）section （4）aside （5）article （6）footer</p>
+
+<pre><code>//&lt;!DOCTYPE&gt; 声明不是 HTML 标签；它是指示 web 浏览器关于页面使用哪个 HTML 版本进行编写的指令。
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    //&lt;header&gt; 标签定义文档的页眉（介绍信息）。
+    &lt;header&gt;
+        //&lt;nav&gt; 标签定义导航链接的部分。
+        &lt;nav&gt;&lt;/nav&gt;
+    &lt;/header&gt;
+    //在一个文档中，不能出现一个以上的 &lt;main&gt; 元素。
+    //&lt;main&gt; 元素不能是以下元素的后代：&lt;article&gt;、&lt;aside&gt;、&lt;footer&gt;、&lt;header&gt; 或 &lt;nav&gt;
+    &lt;main&gt;
+        //&lt;section&gt; 标签定义文档中的节（section、区段）。比如章节、页眉、页脚或文档中的其他部分。
+        &lt;section&gt;
+            //&lt;aside&gt; 标签定义其所处内容之外的内容。
+            //aside 的内容应该与附近的内容相关。
+            &lt;aside&gt;&lt;/aside&gt;
+            //&lt;article&gt; 标签规定独立的自包含内容。
+            //一篇文章应有其自身的意义，应该有可能独立于站点的其余部分对其进行分发。
+            &lt;article&gt;&lt;/article&gt;
+        &lt;/section&gt;
+    &lt;/main&gt;
+    &lt;footer&gt;&lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></li>
+
+<li><p>新增标签兼容问题</p></li>
+</ol>
+
+<ul>
+<li><p>利用document.creatElement()去创建html5的新标签，同时设置成块元素（相对麻烦）</p>
+
+<pre><code>&lt;!--[if lt IE 9]&gt; 
+    &lt;script type=&quot;text/javascript&quot;&gt;
+        var e = &quot;abbr, article, aside, audio, canvas, datalist, details, dialog, eventsource, figure, footer, header, hgroup, mark, menu, meter, nav, output, progress, section, time, video&quot;.split(', ');
+        var i= e.length;
+        while (i--){
+             document.createElement(e[i])
+        }
+    &lt;/script&gt;
+&lt;![endif]--&gt;
+</code></pre></li>
+
+<li><p>借助于第三方的JS框架 =&gt;html5shiv.min.js （推荐）配合IE的hack实现最佳兼容</p>
+
+<pre><code>&lt;!--[if lt IE 9]&gt; 
+    &lt;script src=&quot;js/html5shiv.min.js&quot;&gt;&lt;/script&gt;
+&lt;![endif]--&gt;
+</code></pre></li>
+</ul>
+
+<h3>html5新增的智能表单</h3>
+
+<h4>输入类型</h4>
+
+<table>
+<thead>
+<tr>
+<th>Input表单的type新属性值</th>
+<th>含义</th>
+<th>示例</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>type=&ldquo;email&rdquo;</td>
+<td>限制用户输入必须为Ema</td>
+<td><input type="email"></td>
+</tr>
+
+<tr>
+<td>type=&ldquo;url&rdquo;</td>
+<td>限制用户输入必须为URL类型</td>
+<td><input type="url"></td>
+</tr>
+
+<tr>
+<td>type=&ldquo;date&rdquo;</td>
+<td>自动生成一个日期控件</td>
+<td><input type="date"></td>
+</tr>
+
+<tr>
+<td>type=&ldquo;time&rdquo;</td>
+<td>同上</td>
+<td><input type="time"></td>
+</tr>
+
+<tr>
+<td>type=&ldquo;month&rdquo;</td>
+<td>同上</td>
+<td><input type="month"></td>
+</tr>
+
+<tr>
+<td>type=&ldquo;week&rdquo;</td>
+<td>同上</td>
+<td><input type="week"></td>
+</tr>
+
+<tr>
+<td>type=&ldquo;number&rdquo;</td>
+<td>限制用户输入必须为数字</td>
+<td><input type="number"></td>
+</tr>
+
+<tr>
+<td>type=&ldquo;range&rdquo;</td>
+<td>产生一个滑动条的表单</td>
+<td><input type="range"></td>
+</tr>
+
+<tr>
+<td>type=&ldquo;search&rdquo;</td>
+<td>产生一个搜索意义的表单</td>
+<td><input type="search"></td>
+</tr>
+
+<tr>
+<td>type=&ldquo;color&rdquo;</td>
+<td>生成一个颜色选择表单</td>
+<td><input type="color"></td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p>智能表单的兼容问题比较大，在移动端用的较多，移动端会自动调取手机本身的控件（不同手机之间会略有不同，但如果需要高度自定义，就需要用JS去写了），在企业内部的系统里面可以去使用</p>
+</blockquote>
+
+<h4>表单元素</h4>
+
+<table>
+<thead>
+<tr>
+<th>元素</th>
+<th>含义</th>
+<th>示例</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>datalist</td>
+<td>数据列表</td>
+<td><datalist></td>
+</tr>
+
+<tr>
+<td>keygen</td>
+<td>生成加密字符</td>
+<td><keygen></td>
+</tr>
+
+<tr>
+<td>output</td>
+<td>输出结果</td>
+<td><output></td>
+</tr>
+
+<tr>
+<td>meter</td>
+<td>度量器</td>
+<td><meter></td>
+</tr>
+</tbody>
+</table>
+
+<h4>表单属性</h4>
+
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>用法</th>
+<th>含义</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>placeholder</td>
+<td><input type="text" placeholder="请输入用户名"></td>
+<td>占位符</td>
+</tr>
+
+<tr>
+<td>autofocus</td>
+<td><input type="text" autofocus></td>
+<td>自动获得焦点</td>
+</tr>
+
+<tr>
+<td>multiple</td>
+<td><input type="file" multiple></td>
+<td>多文件上传</td>
+</tr>
+
+<tr>
+<td>autocomplete</td>
+<td><input type="text" autocomplete="off"></td>
+<td>自动完成</td>
+</tr>
+
+<tr>
+<td>form</td>
+<td><input type="text" form="某表单ID"></td>
+<td></td>
+</tr>
+
+<tr>
+<td>novalidate</td>
+<td><form novalidate></form></td>
+<td>关闭验证</td>
+</tr>
+
+<tr>
+<td>required</td>
+<td><input type="text" required></td>
+<td>必填项</td>
+</tr>
+
+<tr>
+<td>pattern</td>
+<td><input type="text" pattern="\d"></td>
+<td>自定义验证</td>
+</tr>
+</tbody>
+</table>
+
+<h4>智能感应</h4>
+
+<ul>
+<li><p>利用表单的list =“datalist的id值”与datalist这个标签取得联系实现</p>
+
+<p><input type="text" list = 'foodList'>
+<datalist id='foodList'>
+    <option value=" 西葫芦">
+    <option value=" 牛肉">
+</datalist></p></li>
+</ul>
+
+<h3>多媒体</h3>
+
+<ul>
+<li><p>直到现在，我们的视频依旧采用第三方的网站播放视频，并且需要借助于flash技术
+在html5中，我们只需要借助于video这个标签来实现视频的播放</p>
+
+<pre><code>&lt;video  controls&gt;
+    &lt;source src=&quot;movie/....ogg&quot;&gt;
+    &lt;source src=&quot;movie/....mp4&quot;&gt;
+&lt;/video&gt;
+</code></pre></li>
+
+<li><p>可以通过附加属性可以更友好控制音频的播放，如：</p>
+
+<ul>
+<li>autoplay 自动播放</li>
+<li>controls 是否显不默认播放控件</li>
+<li>loop 循环播放</li>
+<li>poster 在视频没有播放的时候的预览图片</li>
+</ul></li>
+
+<li><p>视频的API：（注：是JS的，JQ去使用需要转化对象）
+    - play(） 控制视频播放
+    - pause() 控制视频暂停
+    - load()  重新加载视频或者音频
+音频：audio的用法与视频一模一样</p></li>
+</ul>
+
+<blockquote>
+<p>在开发中，如果是一个相对比较大的视频建议还是利用第三方的网站去实现视频播放，一些小的广告类的小视频可以用video，一些宣传类的手机站（特效颇多）我们可以做成一个小的video</p>
+</blockquote>
+
+<h3>JS获取元素的新方式 （兼容8，以上包括8）</h3>
+
+<ol>
+<li>document.querySelector(&lsquo;selector&rsquo;) 通过类似CSS选择器获取元素，符合匹配条件的第1个元素。可以传入复合选择器（如：.box li, .box &gt; li input[type=’button’]）等</li>
+<li>document.querySelectorAll(&lsquo;selector&rsquo;) 通过CSS选择器获取元素，以类数组形式存在。可以传入复合选择器（如：.box li, .box &gt; li input[type=’button’]）等，所以用for去操作整个类数组</li>
+</ol>
+
+<h3>JS类名操作  （移动端常用，兼容：10以上，包括10）</h3>
+
+<ol>
+<li>Node.classList.add(&lsquo;class&rsquo;) 添加class</li>
+<li>Node.classList.remove(&lsquo;class&rsquo;) 移除class</li>
+<li>Node.classList.toggle(&lsquo;class&rsquo;) 切换class，有则移除，无则添加</li>
+<li>Node.classList.contains(&lsquo;class&rsquo;) 检测是否存在class</li>
+</ol>
+
+<h3>自定义属性</h3>
+
+<ul>
+<li>在HTML5中我们可以自定义属性，其格式如下data-*=&ldquo;&ldquo;，例如:data-info=&ldquo;我是自定义属性&rdquo;，通过Node.dataset[&lsquo;info&rsquo;] 我们便可以获取到自定义的属性值。</li>
+<li>Node.dataset是以对象形式存在的</li>
+<li>当我们如下格式设置时，则需要以驼峰格式才能正确获取
+data-my-name=&ldquo;itcast&rdquo;，获取Node.dataset[&lsquo;myName&rsquo;]</li>
+<li>在JQ中，可以通过data方法去获取标签的data属性的值</li>
+</ul>
+</article>
+                <section class="author">
+                    <div class="avatar" style="background-image: url(/images/avatar1.jpg);"></div>
+                    <a class="name" href="/about.me.html">Paparadise</a>
+                    <div class="intro">不要看轻前端职业，更不要看轻自己</div>
+                </section>
+                <section class="recommend">
+                    
+                    <section class="nav prev more">
+                        <div class="head">上篇文章</div>
+                        <a class="link" href="/%e6%95%b0%e7%bb%84%e3%80%81%e5%ad%97%e7%ac%a6%e4%b8%b2%e6%93%8d%e4%bd%9c%e6%96%b9%e6%b3%95.html">数组、字符串操作方法</a>
+                    </section>
+                    
+                    
+                    <section class="nav next more">
+                        <div class="head">下篇文章</div>
+                        <a class="link" href="/%e7%a7%bb%e5%8a%a8%e7%ab%af%e7%9a%84click%e7%82%b9%e9%80%8f%e9%97%ae%e9%a2%98.html">移动端的click点透问题</a>
+                    </section>
+                    
+                </section>
+                
+    <section id="disqus_thread"></section>
+    <script type="text/javascript">
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//Paparadise.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+            </article>
+        </article>
+        <footer class="footer">
+    <span class="copyright">
+        Paparadise ©
+        <script type="text/javascript">
+            document.write(new Date().getFullYear());
+        </script>
+    </span>
+    <span class="publish">Powered by <a href="http://www.chole.io/" target="_blank">Ink</a></span>
+</footer>
+
+        <script src="/bundle/index.js"></script>
+    </body>
+</html>
