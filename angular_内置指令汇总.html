@@ -67,10 +67,10 @@
 </script>
 
 
-        <meta name="keywords" content="Javascript,proto,">
-        <meta name="description" content="原型链结构图">
+        <meta name="keywords" content="angular,">
+        <meta name="description" content="angular内置指令汇总">
         <meta name="author" content="Paparadise">
-        <title>原型链结构图</title>
+        <title>angular内置指令汇总</title>
     </head>
     <body>
         <article class="container">
@@ -87,20 +87,116 @@
 </header>
 
             <article class="main article">
-                <h1 class="title">原型链结构图</h1>
+                <h1 class="title">angular内置指令汇总</h1>
                 <section class="info">
                     <span class="avatar" style="background-image: url(/images/avatar1.jpg);"></span>
                     <a class="name" href="/about.me.html">Paparadise</a>
                     
-                    <span class="date" data-time="1454320800"><span class="from"></span></span>
+                    <span class="date" data-time="1462500000"><span class="from"></span></span>
                     
-                    <span class="tags"><a class="tag" href="/tag/Javascript/index.html">Javascript</a><a class="tag" href="/tag/proto/index.html">proto</a></span>
+                    <span class="tags"><a class="tag" href="/tag/angular/index.html">angular</a></span>
                 </section>
-                <article class="content"><h2>原型链</h2>
+                <article class="content"><table>
+<thead>
+<tr>
+<th>指令名</th>
+<th>含义</th>
+<th>示例代码</th>
+</tr>
+</thead>
 
-<p>Javascript是面向对象的，每个实例对象都有一个__proto__属性，该属性指向它原型对象，这个实例对象的构造函数有一个原型属性prototype，与实例的__proto__属性指向同一个对象。当一个对象在查找一个属性的时，自身没有就会根据_<em>proto_</em> 向它的原型进行查找，如果都没有，则向它的原型的原型继续查找，直到查到Object.prototype.__proto__为nul，这样也就形成了原型链。</p>
+<tbody>
+<tr>
+<td>ng-app</td>
+<td>限定angular所管理的范围</td>
+<td>C1</td>
+</tr>
 
-<p><img src="data:image/gif;base64,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" data-src="./images/prototype.png" alt="原型链结构图" /></p>
+<tr>
+<td>ng-init</td>
+<td>初始化数据模型</td>
+<td>C2</td>
+</tr>
+
+<tr>
+<td>ng-model</td>
+<td>数据模型</td>
+<td>C3</td>
+</tr>
+
+<tr>
+<td>ng-click</td>
+<td>点击</td>
+<td></td>
+</tr>
+
+<tr>
+<td>ng-dblclick</td>
+<td>双击</td>
+<td></td>
+</tr>
+
+<tr>
+<td>ng-change</td>
+<td>select,checkbox标签独有的，不支持双向绑定</td>
+<td></td>
+</tr>
+
+<tr>
+<td>ng-submit</td>
+<td>提交表单相关</td>
+<td></td>
+</tr>
+
+<tr>
+<td>ng-cloak</td>
+<td>样式相关</td>
+<td></td>
+</tr>
+
+<tr>
+<td>ng-class</td>
+<td>类</td>
+<td></td>
+</tr>
+
+<tr>
+<td>ng-show</td>
+<td>显示隐藏</td>
+<td></td>
+</tr>
+
+<tr>
+<td>ng-hide</td>
+<td>显示隐藏</td>
+<td></td>
+</tr>
+
+<tr>
+<td>ng-bind</td>
+<td>绑定数据模型</td>
+<td></td>
+</tr>
+
+<tr>
+<td>ng-switch</td>
+<td>判断</td>
+<td></td>
+</tr>
+
+<tr>
+<td>ng-switch-when</td>
+<td>判断</td>
+<td></td>
+</tr>
+
+<tr>
+<td>ng-if</td>
+<td>显示隐藏、判断</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 </article>
                 <section class="author">
                     <div class="avatar" style="background-image: url(/images/avatar1.jpg);"></div>
@@ -111,13 +207,13 @@
                     
                     <section class="nav prev more">
                         <div class="head">上篇文章</div>
-                        <a class="link" href="/git%e6%80%bb%e7%bb%93.html">git总结</a>
+                        <a class="link" href="/%e6%89%92%e7%bd%91%e7%ab%99%e6%95%99%e7%a8%8b.html">扒网站教程</a>
                     </section>
                     
                     
                     <section class="nav next more">
                         <div class="head">下篇文章</div>
-                        <a class="link" href="/%e6%95%b0%e7%bb%84%e3%80%81%e5%ad%97%e7%ac%a6%e4%b8%b2%e6%93%8d%e4%bd%9c%e6%96%b9%e6%b3%95.html">数组、字符串操作方法</a>
+                        <a class="link" href="/angular_jquery.html">angular中使用jquery</a>
                     </section>
                     
                 </section>

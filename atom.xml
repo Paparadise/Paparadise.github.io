@@ -1,18 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom">
   <title>Paparadise</title>
   <id>https://github.com/Paparadise/Paparadise.github.io.git</id>
-  <updated>2017-04-13T11:22:01+08:00</updated>
+  <updated>2017-04-13T11:49:49+08:00</updated>
   <subtitle>不要看轻前端职业，更不要看轻自己</subtitle>
   <link href="https://github.com/Paparadise/Paparadise.github.io.git"></link>
   <author>
     <name>Paparadise</name>
   </author>
   <entry>
+    <title>理解promise</title>
+    <updated>2016-10-08T10:00:00+08:00</updated>
+    <id>tag:github.com,2016-10-08:/Paparadise/Paparadise.github.io.git/理解promise.html</id>
+    <content type="html">&lt;p&gt;理解promise&lt;/p&gt;&#xA;</content>
+    <link href="https://github.com/Paparadise/Paparadise.github.io.git/理解promise.html"></link>
+    <author>
+      <name>Paparadise</name>
+    </author>
+  </entry>
+  <entry>
     <title>兼容性问题汇总</title>
     <updated>2016-09-01T18:00:00+08:00</updated>
     <id>tag:github.com,2016-09-01:/Paparadise/Paparadise.github.io.git/兼容性问题汇总.html</id>
     <content type="html">&lt;p&gt;兼容性问题汇总.&lt;/p&gt;&#xA;</content>
     <link href="https://github.com/Paparadise/Paparadise.github.io.git/兼容性问题汇总.html"></link>
+    <author>
+      <name>Paparadise</name>
+    </author>
+  </entry>
+  <entry>
+    <title>常用前端资源汇总</title>
+    <updated>2016-07-07T10:00:00+08:00</updated>
+    <id>tag:github.com,2016-07-07:/Paparadise/Paparadise.github.io.git/常用前端资源汇总.html</id>
+    <content type="html">&lt;p&gt;常用前端资源汇总&lt;/p&gt;&#xA;</content>
+    <link href="https://github.com/Paparadise/Paparadise.github.io.git/常用前端资源汇总.html"></link>
+    <author>
+      <name>Paparadise</name>
+    </author>
+  </entry>
+  <entry>
+    <title>扒网站教程</title>
+    <updated>2016-06-03T10:00:00+08:00</updated>
+    <id>tag:github.com,2016-06-03:/Paparadise/Paparadise.github.io.git/扒网站教程.html</id>
+    <content type="html">&lt;p&gt;扒网站&lt;/p&gt;&#xA;</content>
+    <link href="https://github.com/Paparadise/Paparadise.github.io.git/扒网站教程.html"></link>
+    <author>
+      <name>Paparadise</name>
+    </author>
+  </entry>
+  <entry>
+    <title>angular内置指令汇总</title>
+    <updated>2016-05-06T10:00:00+08:00</updated>
+    <id>tag:github.com,2016-05-06:/Paparadise/Paparadise.github.io.git/angular_内置指令汇总.html</id>
+    <content type="html">&lt;p&gt;angular内置指令汇总&lt;/p&gt;&#xA;</content>
+    <link href="https://github.com/Paparadise/Paparadise.github.io.git/angular_内置指令汇总.html"></link>
+    <author>
+      <name>Paparadise</name>
+    </author>
+  </entry>
+  <entry>
+    <title>angular中使用jquery</title>
+    <updated>2016-05-05T10:00:00+08:00</updated>
+    <id>tag:github.com,2016-05-05:/Paparadise/Paparadise.github.io.git/angular_jquery.html</id>
+    <content type="html">&lt;p&gt;angular中使用jquery&lt;/p&gt;&#xA;</content>
+    <link href="https://github.com/Paparadise/Paparadise.github.io.git/angular_jquery.html"></link>
     <author>
       <name>Paparadise</name>
     </author>
@@ -53,46 +103,6 @@
     <id>tag:github.com,2016-04-04:/Paparadise/Paparadise.github.io.git/vue简明教程.html</id>
     <content type="html">&lt;p&gt;优雅、简洁的前端框架&lt;/p&gt;&#xA;</content>
     <link href="https://github.com/Paparadise/Paparadise.github.io.git/vue简明教程.html"></link>
-    <author>
-      <name>Paparadise</name>
-    </author>
-  </entry>
-  <entry>
-    <title>gulp总结</title>
-    <updated>2016-04-03T10:00:00+08:00</updated>
-    <id>tag:github.com,2016-04-03:/Paparadise/Paparadise.github.io.git/gulp使用总结.html</id>
-    <content type="html">&lt;p&gt;gulp是一个用来前端的工作流构建工具。&lt;/p&gt;&#xA;</content>
-    <link href="https://github.com/Paparadise/Paparadise.github.io.git/gulp使用总结.html"></link>
-    <author>
-      <name>Paparadise</name>
-    </author>
-  </entry>
-  <entry>
-    <title>npm总结</title>
-    <updated>2016-04-02T18:00:00+08:00</updated>
-    <id>tag:github.com,2016-04-02:/Paparadise/Paparadise.github.io.git/npm总结.html</id>
-    <content type="html">&lt;p&gt;npm可以作为前端库(框架)的下载工具，也可以作为Node.js项目的包管理工具。&lt;/p&gt;&#xA;</content>
-    <link href="https://github.com/Paparadise/Paparadise.github.io.git/npm总结.html"></link>
-    <author>
-      <name>Paparadise</name>
-    </author>
-  </entry>
-  <entry>
-    <title>原型链结构图</title>
-    <updated>2016-02-01T18:00:00+08:00</updated>
-    <id>tag:github.com,2016-02-01:/Paparadise/Paparadise.github.io.git/原型链结构图.html</id>
-    <content type="html">&lt;p&gt;比较详细的原型链结构图。&lt;/p&gt;&#xA;</content>
-    <link href="https://github.com/Paparadise/Paparadise.github.io.git/原型链结构图.html"></link>
-    <author>
-      <name>Paparadise</name>
-    </author>
-  </entry>
-  <entry>
-    <title>数组、字符串操作方法</title>
-    <updated>2015-12-05T18:00:00+08:00</updated>
-    <id>tag:github.com,2015-12-05:/Paparadise/Paparadise.github.io.git/数组、字符串操作方法.html</id>
-    <content type="html">&lt;p&gt;简单总结了JS中数组和字符串的操作方法。&lt;/p&gt;&#xA;</content>
-    <link href="https://github.com/Paparadise/Paparadise.github.io.git/数组、字符串操作方法.html"></link>
     <author>
       <name>Paparadise</name>
     </author>
