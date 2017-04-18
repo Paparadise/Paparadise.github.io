@@ -1,12 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom">
   <title>Paparadise</title>
   <id>https://github.com/Paparadise/Paparadise.github.io.git</id>
-  <updated>2017-04-13T17:08:38+08:00</updated>
+  <updated>2017-04-18T12:50:06+08:00</updated>
   <subtitle>不要看轻前端职业，更不要看轻自己</subtitle>
   <link href="https://github.com/Paparadise/Paparadise.github.io.git"></link>
   <author>
     <name>Paparadise</name>
   </author>
+  <entry>
+    <title>打包sea.js</title>
+    <updated>2017-04-03T10:00:00+08:00</updated>
+    <id>tag:github.com,2017-04-03:/Paparadise/Paparadise.github.io.git/打包sea.js.html</id>
+    <content type="html">&lt;p&gt;打包sea.js代码&lt;/p&gt;&#xA;</content>
+    <link href="https://github.com/Paparadise/Paparadise.github.io.git/打包sea.js.html"></link>
+  </entry>
+  <entry>
+    <title>深入理解JSON</title>
+    <updated>2016-11-05T18:00:00+08:00</updated>
+    <id>tag:github.com,2016-11-05:/Paparadise/Paparadise.github.io.git/深入理解json.html</id>
+    <content type="html">&lt;p&gt;深入理解JSON.&lt;/p&gt;&#xA;</content>
+    <link href="https://github.com/Paparadise/Paparadise.github.io.git/深入理解json.html"></link>
+    <author>
+      <name>Paparadise</name>
+    </author>
+  </entry>
   <entry>
     <title>理解promise</title>
     <updated>2016-10-08T10:00:00+08:00</updated>
@@ -18,11 +35,31 @@
     </author>
   </entry>
   <entry>
+    <title>闭包的原理</title>
+    <updated>2016-09-20T18:00:00+08:00</updated>
+    <id>tag:github.com,2016-09-20:/Paparadise/Paparadise.github.io.git/闭包.html</id>
+    <content type="html">&lt;p&gt;闭包的原理。&lt;/p&gt;&#xA;</content>
+    <link href="https://github.com/Paparadise/Paparadise.github.io.git/闭包.html"></link>
+    <author>
+      <name>Paparadise</name>
+    </author>
+  </entry>
+  <entry>
     <title>兼容性问题汇总</title>
     <updated>2016-09-01T18:00:00+08:00</updated>
     <id>tag:github.com,2016-09-01:/Paparadise/Paparadise.github.io.git/兼容性问题汇总.html</id>
     <content type="html">&lt;p&gt;兼容性问题汇总.&lt;/p&gt;&#xA;</content>
     <link href="https://github.com/Paparadise/Paparadise.github.io.git/兼容性问题汇总.html"></link>
+    <author>
+      <name>Paparadise</name>
+    </author>
+  </entry>
+  <entry>
+    <title>移动端的click点透问题</title>
+    <updated>2016-08-06T18:00:00+08:00</updated>
+    <id>tag:github.com,2016-08-06:/Paparadise/Paparadise.github.io.git/移动端的click点透问题.html</id>
+    <content type="html">&lt;p&gt;移动端的click点透问题及解决方案。&lt;/p&gt;&#xA;</content>
+    <link href="https://github.com/Paparadise/Paparadise.github.io.git/移动端的click点透问题.html"></link>
     <author>
       <name>Paparadise</name>
     </author>
@@ -63,46 +100,6 @@
     <id>tag:github.com,2016-05-05:/Paparadise/Paparadise.github.io.git/angular_jquery.html</id>
     <content type="html">&lt;p&gt;angular中使用jquery&lt;/p&gt;&#xA;</content>
     <link href="https://github.com/Paparadise/Paparadise.github.io.git/angular_jquery.html"></link>
-    <author>
-      <name>Paparadise</name>
-    </author>
-  </entry>
-  <entry>
-    <title>跨域</title>
-    <updated>2016-05-02T18:00:00+08:00</updated>
-    <id>tag:github.com,2016-05-02:/Paparadise/Paparadise.github.io.git/跨域.html</id>
-    <content type="html">&lt;p&gt;跨域问题的解决方案。&lt;/p&gt;&#xA;</content>
-    <link href="https://github.com/Paparadise/Paparadise.github.io.git/跨域.html"></link>
-    <author>
-      <name>Paparadise</name>
-    </author>
-  </entry>
-  <entry>
-    <title>Ajax总结</title>
-    <updated>2016-05-01T10:00:00+08:00</updated>
-    <id>tag:github.com,2016-05-01:/Paparadise/Paparadise.github.io.git/ajax总结.html</id>
-    <content type="html">&lt;p&gt;Ajax的介绍以及使用方法。&lt;/p&gt;&#xA;</content>
-    <link href="https://github.com/Paparadise/Paparadise.github.io.git/ajax总结.html"></link>
-    <author>
-      <name>Paparadise</name>
-    </author>
-  </entry>
-  <entry>
-    <title>vue cli使用总结</title>
-    <updated>2016-04-05T10:00:00+08:00</updated>
-    <id>tag:github.com,2016-04-05:/Paparadise/Paparadise.github.io.git/vue cli使用总结.html</id>
-    <content type="html">&lt;p&gt;vue项目脚手架&lt;/p&gt;&#xA;</content>
-    <link href="https://github.com/Paparadise/Paparadise.github.io.git/vue cli使用总结.html"></link>
-    <author>
-      <name>Paparadise</name>
-    </author>
-  </entry>
-  <entry>
-    <title>vue简明教程</title>
-    <updated>2016-04-04T10:00:00+08:00</updated>
-    <id>tag:github.com,2016-04-04:/Paparadise/Paparadise.github.io.git/vue简明教程.html</id>
-    <content type="html">&lt;p&gt;优雅、简洁的前端框架&lt;/p&gt;&#xA;</content>
-    <link href="https://github.com/Paparadise/Paparadise.github.io.git/vue简明教程.html"></link>
     <author>
       <name>Paparadise</name>
     </author>

@@ -92,7 +92,7 @@
                     <span class="avatar" style="background-image: url(/images/avatar1.jpg);"></span>
                     <a class="name" href="/about.me.html">Paparadise</a>
                     
-                    <span class="date" data-time="1441533600"><span class="from"></span></span>
+                    <span class="date" data-time="1470477600"><span class="from"></span></span>
                     
                     <span class="tags"><a class="tag" href="/tag/%e7%a7%bb%e5%8a%a8%e7%ab%af/index.html">移动端</a><a class="tag" href="/tag/click%e4%ba%8b%e4%bb%b6/index.html">click事件</a></span>
                 </section>
@@ -124,7 +124,7 @@
 <ol>
 <li><p>touchstart：在这个DOM（或冒泡到这个DOM）上手指触摸开始即能立即触发</p></li>
 
-<li><p>click：在这个DOM（或冒泡到这个DOM）上手指触摸开始，且手指未曾在屏幕上移动（某些浏览器允许移动一个非常小的位移值），且在这个在这个dom上手指离开屏幕，且触摸和离开屏幕之间的间隔时间较短（某些浏览器不检测间隔时间，也会触发click）才能触发</p></li>
+<li><p>click：在这个DOM（或冒泡到这个DOM）上手指触摸开始，且手指未曾在屏幕上移动（某些浏览器允许移动一个非常小的位移值），且在这个dom上手指离开屏幕，且触摸和离开屏幕之间的间隔时间较短（某些浏览器不检测间隔时间，也会触发click）才能触发</p></li>
 </ol>
 
 <p>也就是说，事件的触发时间按由早到晚排列为：touchstart 早于 touchend 早于 click。亦即click的触发是有延迟的，这个时间大概在300ms左右。</p>
@@ -139,14 +139,12 @@
 <ol>
 <li><p>对于B元素本身没有默认click事件的情况（无a标签等），应统一使用touch事件，统一代码风格，并且由于click事件在移动端的延迟要大很多，不利于用户体验，所以关于触摸事件应尽量使用touch相关事件。</p></li>
 
-<li><p>对于B元素本身存在默认click事件的情况,应及时取消A元素的默认点击事件，从而阻止click事件的产生。即应在上例的 handle函数中添加 代码如下：</p></li>
-</ol>
+<li><p>对于B元素本身存在默认click事件的情况,应及时取消B元素的默认点击事件，从而阻止click事件的产生。即应添加 代码如下：</p>
 
 <pre><code>    if(eve == &quot;touchsend&quot;) e.preventDefault();
-</code></pre>
+</code></pre></li>
 
-<ol>
-<li>对于遮盖浮层，由于遮盖浮层的点击即使有小延迟也是没有关系的，反而会有疑似更好的用户体验，所以这种情况，可以针对遮盖浮层自己采用click事件，这样就不会出现点透问题。</li>
+<li><p>对于遮盖浮层，由于遮盖浮层的点击即使有小延迟也是没有关系的，反而会有疑似更好的用户体验，所以这种情况，可以针对遮盖浮层自己采用click事件，这样就不会出现点透问题。</p></li>
 </ol>
 
 <h3>现有解决方案框架（库）</h3>
@@ -164,11 +162,16 @@
                 </section>
                 <section class="recommend">
                     
-                    <section class="nav prev">
+                    <section class="nav prev more">
                         <div class="head">上篇文章</div>
-                        <a class="link" href="/html5.html">HTML5</a>
+                        <a class="link" href="/%e5%85%bc%e5%ae%b9%e6%80%a7%e9%97%ae%e9%a2%98%e6%b1%87%e6%80%bb.html">兼容性问题汇总</a>
                     </section>
                     
+                    
+                    <section class="nav next more">
+                        <div class="head">下篇文章</div>
+                        <a class="link" href="/%e5%b8%b8%e7%94%a8%e5%89%8d%e7%ab%af%e8%b5%84%e6%ba%90%e6%b1%87%e6%80%bb.html">常用前端资源汇总</a>
+                    </section>
                     
                 </section>
                 

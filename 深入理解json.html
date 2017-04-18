@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1, minimum-scale=1, maximum-scale=1">
+<meta name="renderer" content="webkit">
+<meta name="google" value="notranslate">
+<meta name="robots" content="index,follow">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Paparadise">
+<meta name="twitter:description" content="不要看轻前端职业，更不要看轻自己">
+<meta name="twitter:image:src" content="https://github.com/Paparadise/Paparadise.github.io.git/images/avatar1.jpg">
+
+<meta property="og:url" content="https://github.com/Paparadise/Paparadise.github.io.git">
+<meta property="og:title" content="Paparadise">
+<meta property="og:description" content="不要看轻前端职业，更不要看轻自己">
+<meta property="og:site_name" content="Paparadise">
+<meta property="og:image" content="https://github.com/Paparadise/Paparadise.github.io.git/images/avatar1.jpg">
+<meta property="og:type" content="website">
+<meta name="robots" content="noodp">
+
+<meta itemprop="name" content="Paparadise">
+<meta itemprop="description" content="不要看轻前端职业，更不要看轻自己">
+<meta itemprop="image" content="https://github.com/Paparadise/Paparadise.github.io.git/images/avatar1.jpg">
+
+<link rel="canonical" href="https://github.com/Paparadise/Paparadise.github.io.git">
+
+<link rel="shortcut icon" href="/favicon.png">
+<link rel="apple-itouch-icon" href="/favicon.png">
+<link rel="stylesheet" href="/bundle/index.css">
+<script type="text/javascript">
+    var timeSinceLang = {
+        year: '年前',
+        month: '个月前',
+        day: '天前',
+        hour: '小时前',
+        minute: '分钟前',
+        second: '秒前'
+    };
+    var root = '';
+</script>
+
+<script type="text/javascript">
+    var conn, reloadTimer, connectTimer;
+    var connect = function() {
+        conn = new WebSocket('ws://' + location.host + '/live');
+        conn.onmessage = function(event) {
+            if (event.data === 'change') {
+                if (reloadTimer) clearTimeout(reloadTimer);
+                reloadTimer = setTimeout(function() {
+                    window.location.reload();
+                }, 200);
+            }
+        };
+        conn.onclose = function() {
+            if (connectTimer) clearTimeout(connectTimer);
+            connectTimer = setTimeout(function() {
+                connect();
+            }, 1000);
+        };
+    };
+    connect();
+</script>
+
+
+        <meta name="keywords" content="Javascript,Json,">
+        <meta name="description" content="深入理解JSON">
+        <meta name="author" content="Paparadise">
+        <title>深入理解JSON</title>
+    </head>
+    <body>
+        <article class="container">
+            <header class="header-wrap">
+  <a class="index" href="/">
+    <img class="logo" src="/images/avatar1.jpg" />
+    Paparadise
+  </a>
+  <ul class="menu">
+      <li class="menu-item"><a href="/archive.html">归档</a></li>
+      <li class="menu-item"><a href="/tag.html">标签</a></li>
+      <li class="menu-item"><a href="/atom.xml">订阅</a></li>
+  </ul>
+</header>
+
+            <article class="main article">
+                <h1 class="title">深入理解JSON</h1>
+                <section class="info">
+                    <span class="avatar" style="background-image: url(/images/avatar1.jpg);"></span>
+                    <a class="name" href="/about.me.html">Paparadise</a>
+                    
+                    <span class="date" data-time="1478340000"><span class="from"></span></span>
+                    
+                    <span class="tags"><a class="tag" href="/tag/Javascript/index.html">Javascript</a><a class="tag" href="/tag/Json/index.html">Json</a></span>
+                </section>
+                <article class="content"><ul>
+<li><a href="#JSON是一种格式，基于文本，优于轻量，用于交换数据">JSON是一种格式，基于文本，优于轻量，用于交换数据</a>
+
+<ul>
+<li><a href="#一种数据格式">一种数据格式</a></li>
+<li><a href="#基于文本的数据格式">基于文本的数据格式</a></li>
+<li><a href="#轻量级的数据格式">轻量级的数据格式</a></li>
+<li><a href="#被广泛地用于数据交换">被广泛地用于数据交换</a></li>
+</ul></li>
+<li><a href="#JSON和JS对象的区别">JSON和JS对象的区别</a>
+
+<ul>
+<li><a href="#两个本质不同的东西为什么那么密切">两个本质不同的东西为什么那么密切</a></li>
+<li><a href="#JSON格式区别JS对象语法表现上严格在哪">JSON格式区别JS对象语法表现上严格在哪</a></li>
+<li><a href="#JSON不是JS的子集">JSON不是JS的子集</a></li>
+</ul></li>
+<li><a href="#JSON相关函数具体的执行细节">JSON相关函数具体的执行细节</a></li>
+</ul>
+
+<p>先来看一个JS中常见的JS对象序列化成JSON字符串的问题，请问，以下JS对象通过JSON.stringify后的字符串是怎样的？</p>
+
+<pre><code>var friend={  
+    firstName: 'Good',
+    'lastName': 'Man',
+    'address': undefined,
+    'phone': [&quot;1234567&quot;,undefined],
+    'fullName': function(){
+        return this.firstName + ' ' + this.lastName;
+    }
+};
+JSON.stringify(friend);//这一行返回什么呢？ 
+</code></pre>
+
+<p>第二个问题，如果我想在最终JSON字符串将这个&rsquo;friend&rsquo;的姓名全部变成大写字母，也就是把&rdquo;Good&rdquo;变成&rdquo;GOOD&rdquo;，把&rdquo;Man&rdquo;变成&rdquo;MAN&rdquo;，那么可以怎么做？</p>
+
+<p>基于以上两个问题，我们再追本溯源问一下，JSON究竟是什么东西？为什么JSON就是易于数据交换？JSON和JS对象的区别？JS中JSON.parse、JSON.stringify和不常见的toJSON，这几个函数的参数和处理细节到底是怎样的？</p>
+
+<p>下文将从以下几个方面去理解JSON：</p>
+
+<p>首先是对“JSON是一种轻量的数据交换格式”的理解；</p>
+
+<p>然后来看经常被混为一谈的JSON和JS对象的区别；</p>
+
+<p>最后我们再来看JS中这几个JSON相关函数具体的执行细节。</p>
+
+<h3>一、JSON是一种格式，基于文本，优于轻量，用于交换数据</h3>
+
+<p>如果没有去过JSON的官方介绍可以去一下，官方介绍第一、二段已经很清楚地表述了JSON是什么，我将JSON是什么提炼成以下几个方面：</p>
+
+<ol>
+<li>一种数据格式</li>
+</ol>
+
+<p>什么是格式？就是规范你的数据要怎么表示，举个例子，有个人叫“二百六”，身高“160cm”，体重“60kg”，现在你要将这个人的这些信息传给别人或者别的什么东西，你有很多种选择：</p>
+
+<pre><code>姓名“二百六”，身高“160cm”，体重“60kg”
+
+name=&quot;二百六&quot;&amp;height=&quot;160cm&quot;&amp;weight=&quot;60kg&quot;
+
+&lt;person&gt;&lt;name&gt;二百六&lt;/name&gt;&lt;height&gt;160&lt;/height&gt;&lt;weight&gt;60&lt;/weight&gt;&lt;/person&gt;
+
+{&quot;name&quot;:&quot;二百六&quot;,&quot;height&quot;:160,&quot;weight&quot;:60}
+
+... ...
+
+</code></pre>
+
+<p>以上所有选择，传递的数据是一样的，但是你可以看到形式是可以各式各样的，这就是各种不同格式化后的数据，JSON是其中一种表示方式。</p>
+
+<ol>
+<li>基于文本的数据格式</li>
+</ol>
+
+<p>JSON是基于文本的数据格式，相对于基于二进制的数据，所以JSON在传递的时候是传递符合JSON这种格式的字符串，我们常会称为“JSON字符串”。</p>
+
+<ol>
+<li>轻量级的数据格式</li>
+</ol>
+
+<p>在JSON之前，有一个数据格式叫xml，现在还是广泛在用，但是JSON更加轻量，如xml需要用到很多标签，像上面的例子中，你可以明显看到xml格式的数据中标签本身占据了很多空间，而JSON比较轻量，即相同数据，以JSON的格式占据的带宽更小，这在有大量数据请求和传递的情况下是有明显优势的。</p>
+
+<ol>
+<li>被广泛地用于数据交换</li>
+</ol>
+
+<p>轻量已经是一个用于数据交换的优势了，但更重要的JSON是易于阅读、编写和机器解析的，即这个JSON对人和机器都是友好的，而且又轻，独立于语言（因为是基于文本的），所以JSON被广泛用于数据交换。</p>
+
+<p>以前端JS进行ajax的POST请求为例，后端PHP处理请求为例：</p>
+
+<p>前端构造一个JS对象，用于包装要传递的数据，然后将JS对象转化为JSON字符串，再发送请求到后端；</p>
+
+<p>后端PHP接收到这个JSON字符串，将JSON字符串转化为PHP对象，然后处理请求。</p>
+
+<p>可以看到，相同的数据在这里有3种不同的表现形式，分别是前端的JS对象、传输的JSON字符串、后端的PHP对象，JS对象和PHP对象明显不是一个东西，但是由于大家用的都是JSON来传递数据，大家都能理解这种数据格式，都能把JSON这种数据格式很容易地转化为自己能理解的数据结构，这就方便了，在其他各种语言环境中交换数据都是如此。</p>
+
+<h3>二、JSON和JS对象的区别</h3>
+
+<p>很多时候都听到“JSON是JS的一个子集”这句话，而且这句话我曾经也一直这么认为，每个符合JSON格式的字符串你解析成js都是可以的，直到后来发现了一个奇怪的东西&hellip;</p>
+
+<ol>
+<li>两个本质不同的东西为什么那么密切</li>
+</ol>
+
+<p>JSON和JS对象本质上完全不是同一个东西，就像“斑马线”和“斑马”，“斑马线”基于“斑马”身上的条纹来呈现和命名，但是斑马是活的，斑马线是非生物。</p>
+
+<p>同样，&rdquo;JSON&rdquo;全名&rdquo;JavaScript Object Notation&rdquo;，所以它的格式（语法）是基于JS的，但它就是一种格式，而JS对象是一个实例，是存在于内存的一个东西。</p>
+
+<p>说句玩笑话，如果JSON是基于PHP的，可能就叫PON了，形式可能就是这样的了[&lsquo;propertyOne&rsquo; =&gt; &lsquo;foo&rsquo;, &lsquo;propertyTwo&rsquo; =&gt; 42,]，如果这样，那么JSON可能现在是和PHP比较密切了。</p>
+
+<p>此外，JSON是可以传输的，因为它是文本格式，但是JS对象是没办法传输的，在语法上，JSON也会更加严格，但是JS对象就很松了。</p>
+
+<p>那么两个不同的东西为什么那么密切，因为JSON毕竟是从JS中演变出来的，语法相近。</p>
+
+<ol>
+<li>JSON格式区别JS对象语法表现上严格在哪</li>
+</ol>
+
+<p>先就以“键值对为表现的对象”形式上，对比下两者的不同，至于JSON还能以怎样的形式表现，对比完后再罗列。</p>
+
+<p><img src="data:image/gif;base64,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" data-src="./images/json.jpg" alt="" /></p>
+
+<p>可以看到，相对于JS对象，JSON的格式更严格，所以大部分写的JS对象是不符合JSON的格式的。</p>
+
+<p>以下代码引用自这里</p>
+
+<pre><code>var obj1 = {}; // 这只是 JS 对象
+
+// 可把这个称做：JSON 格式的 JavaScript 对象 
+var obj2 = {&quot;width&quot;:100,&quot;height&quot;:200,&quot;name&quot;:&quot;rose&quot;};
+
+// 可把这个称做：JSON 格式的字符串
+var str1 = '{&quot;width&quot;:100,&quot;height&quot;:200,&quot;name&quot;:&quot;rose&quot;}';
+
+// 这个可叫 JSON 格式的数组，是 JSON 的稍复杂一点的形式
+var arr = [  
+    {&quot;width&quot;:100,&quot;height&quot;:200,&quot;name&quot;:&quot;rose&quot;},
+    {&quot;width&quot;:100,&quot;height&quot;:200,&quot;name&quot;:&quot;rose&quot;},
+    {&quot;width&quot;:100,&quot;height&quot;:200,&quot;name&quot;:&quot;rose&quot;},
+];
+
+// 这个可叫稍复杂一点的 JSON 格式的字符串     
+var str2='['+  
+    '{&quot;width&quot;:100,&quot;height&quot;:200,&quot;name&quot;:&quot;rose&quot;},'+
+    '{&quot;width&quot;:100,&quot;height&quot;:200,&quot;name&quot;:&quot;rose&quot;},'+
+    '{&quot;width&quot;:100,&quot;height&quot;:200,&quot;name&quot;:&quot;rose&quot;},'+
+']';  
+</code></pre>
+
+<p>另外，除了常见的“正常的”JSON格式，要么表现为一个对象形式{&hellip;}，要么表现为一个数组形式[&hellip;]，任何单独的一个10进制数值、双引号字符串、布尔值和null都是有效符合JSON格式的。</p>
+
+<ol>
+<li>JSON不是JS的子集</li>
+</ol>
+
+<p>首先看下面的代码：</p>
+
+<pre><code>var code = '&quot;\u2028\u2029&quot;';  
+JSON.parse(code); // works fine  
+eval(code); // fails  
+</code></pre>
+
+<p>这两个字符\u2028和\u2029分别表示行分隔符和段落分隔符，JSON.parse可以正常解析，但是当做js解析时会报错。</p>
+
+<h3>三、JSON相关函数具体的执行细节</h3>
+
+<p>在JS中我们主要会接触到两个和JSON相关的函数，分别用于JSON字符串和JS数据结构之间的转化，一个叫JSON.stringify，它很聪明，聪明到你写的不符合JSON格式的JS对象都能帮你处理成符合JSON格式的字符串，所以你得知道它到底干了什么，免得它只是自作聪明，然后让你Debug long time；另一个叫JSON.parse，用于转化json字符串到JS数据结构，它很严格，你的JSON字符串如果构造地不对，是没办法解析的。</p>
+
+<p>而它们的参数不止一个，虽然我们经常用的时候只传入一个参数。</p>
+
+<p>此外，还有一个toJSON函数，我们较少看到，但是它会影响JSON.stringify。</p>
+
+<ol>
+<li>将JS数据结构转化为JSON字符串——JSON.stringify</li>
+</ol>
+
+<p>这个函数的函数签名是这样的：</p>
+
+<pre><code>JSON.stringify(value[, replacer [, space]]) 
+</code></pre>
+
+<p>下面将分别展开带1~3个参数的用法，最后是它在序列化时做的一些“聪明”的事，要特别注意。</p>
+
+<p>1.1 基本使用——仅需一个参数</p>
+
+<p>这个大家都会使用，传入一个JSON格式的JS对象或者数组，JSON.stringify({&ldquo;name&rdquo;:&ldquo;Good Man&rdquo;,&ldquo;age&rdquo;:18})返回一个字符串&rdquo;{&ldquo;name&rdquo;:&ldquo;Good Man&rdquo;,&ldquo;age&rdquo;:18}&ldquo;。</p>
+
+<p>可以看到本身我们传入的这个JS对象就是符合JSON格式的，用的双引号，也没有JSON不接受的属性值，那么如果像开头那个例子中的一样，how to play？不急，我们先举简单的例子来说明这个函数的几个参数的意义，再来说这个问题。</p>
+
+<p>1.2 第二个参数可以是函数，也可以是一个数组</p>
+
+<p>如果第二个参数是一个函数，那么序列化过程中的每个属性都会被这个函数转化和处理</p>
+
+<p>如果第二个参数是一个数组，那么只有包含在这个数组中的属性才会被序列化到最终的JSON字符串中</p>
+
+<p>如果第二个参数是null，那作用上和空着没啥区别，但是不想设置第二个参数，只是想设置第三个参数的时候，就可以设置第二个参数为null</p>
+
+<p>这第二个参数若是函数</p>
+
+<pre><code>var friend={  
+    &quot;firstName&quot;: &quot;Good&quot;,
+    &quot;lastName&quot;: &quot;Man&quot;,
+    &quot;phone&quot;:&quot;1234567&quot;,
+    &quot;age&quot;:18
+};
+
+var friendAfter=JSON.stringify(friend,function(key,value){  
+    if(key===&quot;phone&quot;)
+        return &quot;(000)&quot;+value;
+    else if(typeof value === &quot;number&quot;)
+        return value + 10;
+    else
+        return value; //如果你把这个else分句删除，那么结果会是undefined
+});
+
+console.log(friendAfter);  
+//输出：{&quot;firstName&quot;:&quot;Good&quot;,&quot;lastName&quot;:&quot;Man&quot;,&quot;phone&quot;:&quot;(000)1234567&quot;,&quot;age&quot;:28}
+</code></pre>
+
+<p>如果制定了第二个参数是函数，那么这个函数必须对每一项都有返回，这个函数接受两个参数，一个键名，一个是属性值，函数必须针对每一个原来的属性值都要有新属性值的返回。</p>
+
+<p>那么问题来了，如果传入的不是键值对的对象形式，而是方括号的数组形式呢？，比如上面的friend变成这样：friend=[&ldquo;Jack&rdquo;,&ldquo;Rose&rdquo;]，那么这个逐属性处理的函数接收到的key和value又是什么？如果是数组形式，那么key是索引，而value是这个数组项，你可以在控制台在这个函数内部打印出来这个key和value验证。</p>
+
+<p>这第二个参数若是数组</p>
+
+<pre><code>var friend={  
+    &quot;firstName&quot;: &quot;Good&quot;,
+    &quot;lastName&quot;: &quot;Man&quot;,
+    &quot;phone&quot;:&quot;1234567&quot;,
+    &quot;age&quot;:18
+};
+
+//注意下面的数组有一个值并不是上面对象的任何一个属性名
+var friendAfter=JSON.stringify(friend,[&quot;firstName&quot;,&quot;address&quot;,&quot;phone&quot;]);
+
+console.log(friendAfter);  
+//{&quot;firstName&quot;:&quot;Good&quot;,&quot;phone&quot;:&quot;1234567&quot;}
+//指定的“address”由于没有在原来的对象中找到而被忽略
+</code></pre>
+
+<p>如果第二个参数是一个数组，那么只有在数组中出现的属性才会被序列化进结果字符串，只要在这个提供的数组中找不到的属性就不会被包含进去，而这个数组中存在但是源JS对象中不存在的属性会被忽略，不会报错。</p>
+
+<p>1.3 第三个参数用于美化输出——不建议用</p>
+
+<p>指定缩进用的空白字符，可以取以下几个值：</p>
+
+<p>是1-10的某个数字，代表用几个空白字符</p>
+
+<p>是字符串的话，就用该字符串代替空格，最多取这个字符串的前10个字符</p>
+
+<p>没有提供该参数 等于 设置成null 等于 设置一个小于 1 的数</p>
+
+<pre><code>var friend={  
+    &quot;firstName&quot;: &quot;Good&quot;,
+    &quot;lastName&quot;: &quot;Man&quot;,
+    &quot;phone&quot;:{&quot;home&quot;:&quot;1234567&quot;,&quot;work&quot;:&quot;7654321&quot;}
+};
+
+//直接转化是这样的：
+//{&quot;firstName&quot;:&quot;Good&quot;,&quot;lastName&quot;:&quot;Man&quot;,&quot;phone&quot;:{&quot;home&quot;:&quot;1234567&quot;,&quot;work&quot;:&quot;7654321&quot;}}
+
+var friendAfter=JSON.stringify(friend,null,4);  
+console.log(friendAfter);  
+/*
+{
+    &quot;firstName&quot;: &quot;Good&quot;,
+    &quot;lastName&quot;: &quot;Man&quot;,
+    &quot;phone&quot;: {
+        &quot;home&quot;: &quot;1234567&quot;,
+        &quot;work&quot;: &quot;7654321&quot;
+    }
+}
+*/
+
+var friendAfter=JSON.stringify(friend,null,&quot;HAHAHAHA&quot;);  
+console.log(friendAfter);  
+/*
+{
+HAHAHAHA&quot;firstName&quot;: &quot;Good&quot;,  
+HAHAHAHA&quot;lastName&quot;: &quot;Man&quot;,  
+HAHAHAHA&quot;phone&quot;: {  
+HAHAHAHAHAHAHAHA&quot;home&quot;: &quot;1234567&quot;,  
+HAHAHAHAHAHAHAHA&quot;work&quot;: &quot;7654321&quot;  
+HAHAHAHA}  
+}
+*/
+
+var friendAfter=JSON.stringify(friend,null,&quot;WhatAreYouDoingNow&quot;);  
+console.log(friendAfter);  
+/* 最多只取10个字符
+{
+WhatAreYou&quot;firstName&quot;: &quot;Good&quot;,  
+WhatAreYou&quot;lastName&quot;: &quot;Man&quot;,  
+WhatAreYou&quot;phone&quot;: {  
+WhatAreYouWhatAreYou&quot;home&quot;: &quot;1234567&quot;,  
+WhatAreYouWhatAreYou&quot;work&quot;: &quot;7654321&quot;  
+WhatAreYou}  
+}
+*/
+</code></pre>
+
+<p>序列化是为了传输，传输就是能越小越好，加莫名其妙的缩进符，解析困难（如果是字符串的话），也弱化了轻量化这个特点。</p>
+
+<p>1.4 注意这个函数的“小聪明”（重要）</p>
+
+<p>如果有其他不确定的情况，那么最好的办法就是&rdquo;Have a try&rdquo;，控制台做下实验就明了。</p>
+
+<p>键名不是双引号的（包括没有引号或者是单引号），会自动变成双引号；字符串是单引号的，会自动变成双引号</p>
+
+<p>最后一个属性后面有逗号的，会被自动去掉</p>
+
+<p>非数组对象的属性不能保证以特定的顺序出现在序列化后的字符串中 这个好理解，也就是对非数组对象在最终字符串中不保证属性顺序和原来一致</p>
+
+<p>布尔值、数字、字符串的包装对象在序列化过程中会自动转换成对应的原始值</p>
+
+<p>也就是你的什么new String(&ldquo;bala&rdquo;)会变成&rdquo;bala&rdquo;，new Number(2017)会变成2017</p>
+
+<p>undefined、任意的函数（其实有个函数会发生神奇的事，后面会说）以及 symbol 值（symbol详见ES6对symbol的介绍）</p>
+
+<p>出现在非数组对象的属性值中：在序列化过程中会被忽略</p>
+
+<p>出现在数组中时：被转换成 null</p>
+
+<pre><code>JSON.stringify({x: undefined, y: function(){return 1;}, z: Symbol(&quot;&quot;)});  
+//出现在非数组对象的属性值中被忽略：&quot;{}&quot;
+JSON.stringify([undefined, Object, Symbol(&quot;&quot;)]);  
+//出现在数组对象的属性值中，变成null：&quot;[null,null,null]&quot;
+NaN、Infinity和-Infinity，不论在数组还是非数组的对象中，都被转化为null
+</code></pre>
+
+<p>所有以 symbol 为属性键的属性都会被完全忽略掉，即便 replacer 参数中强制指定包含了它们</p>
+
+<p>不可枚举的属性会被忽略</p>
+
+<ol>
+<li>将JSON字符串解析为JS数据结构——JSON.parse</li>
+</ol>
+
+<p>这个函数的函数签名是这样的：</p>
+
+<pre><code>JSON.parse(text[, reviver])  
+</code></pre>
+
+<p>如果第一个参数，即JSON字符串不是合法的字符串的话，那么这个函数会抛出错误，所以如果你在写一个后端返回JSON字符串的脚本，最好调用语言本身的JSON字符串相关序列化函数，而如果是自己去拼接实现的序列化字符串，那么就尤其要注意序列化后的字符串是否是合法的，合法指这个JSON字符串完全符合JSON要求的严格格式。</p>
+
+<p>值得注意的是这里有一个可选的第二个参数，这个参数必须是一个函数，这个函数作用在属性已经被解析但是还没返回前，将属性处理后再返回。</p>
+
+<pre><code>var friend={  
+    &quot;firstName&quot;: &quot;Good&quot;,
+    &quot;lastName&quot;: &quot;Man&quot;,
+    &quot;phone&quot;:{&quot;home&quot;:&quot;1234567&quot;,&quot;work&quot;:[&quot;7654321&quot;,&quot;999000&quot;]}
+};
+
+//我们先将其序列化
+var friendAfter=JSON.stringify(friend);  
+//'{&quot;firstName&quot;:&quot;Good&quot;,&quot;lastName&quot;:&quot;Man&quot;,&quot;phone&quot;:{&quot;home&quot;:&quot;1234567&quot;,&quot;work&quot;:[&quot;7654321&quot;,&quot;999000&quot;]}}'
+
+//再将其解析出来，在第二个参数的函数中打印出key和value
+JSON.parse(friendAfter,function(k,v){  
+    console.log(k);
+    console.log(v);
+    console.log(&quot;----&quot;);
+});
+/*
+firstName  
+Good  
+----
+lastName  
+Man  
+----
+home  
+1234567  
+----
+0  
+7654321  
+----
+1  
+999000  
+----
+work  
+[]
+----
+phone  
+Object  
+----
+
+Object  
+----
+*/
+</code></pre>
+
+<p>仔细看一下这些输出，可以发现这个遍历是由内而外的，可能由内而外这个词大家会误解，最里层是内部数组里的两个值啊，但是输出是从第一个属性开始的，怎么就是由内而外的呢？</p>
+
+<p>这个由内而外指的是对于复合属性来说的，通俗地讲，遍历的时候，从头到尾进行遍历，如果是简单属性值（数值、字符串、布尔值和null），那么直接遍历完成，如果是遇到属性值是对象或者数组形式的，那么暂停，先遍历这个子JSON，而遍历的原则也是一样的，等这个复合属性遍历完成，那么再完成对这个属性的遍历返回。</p>
+
+<p>本质上，这就是一个深度优先的遍历。</p>
+
+<p>有两点需要注意：</p>
+
+<p>如果 reviver 返回 undefined，则当前属性会从所属对象中删除，如果返回了其他值，则返回的值会成为当前属性新的属性值。</p>
+
+<p>你可以注意到上面例子最后一组输出看上去没有key，其实这个key是一个空字符串，而最后的object是最后解析完成对象，因为到了最上层，已经没有真正的属性了。</p>
+
+<ol>
+<li>影响 JSON.stringify 的神奇函数——object.toJSON</li>
+</ol>
+
+<p>如果你在一个JS对象上实现了toJSON方法，那么调用JSON.stringify去序列化这个JS对象时，JSON.stringify会把这个对象的toJSON方法返回的值作为参数去进行序列化。</p>
+
+<pre><code>var info={  
+    &quot;msg&quot;:&quot;I Love You&quot;,
+    &quot;toJSON&quot;:function(){
+        var replaceMsg=new Object();
+        replaceMsg[&quot;msg&quot;]=&quot;Go Die&quot;;
+        return replaceMsg;
+    }
+};
+
+JSON.stringify(info);  
+//出事了，返回的是：'&quot;{&quot;msg&quot;:&quot;Go Die&quot;}&quot;',说好的忽略函数呢
+</code></pre>
+
+<p>这个函数就是这样子的。</p>
+
+<p>其实Date类型可以直接传给JSON.stringify做参数，其中的道理就是，Date类型内置了toJSON方法。</p>
+
+<p>四、小结以及关于兼容性的问题</p>
+
+<p>到这里终于把，JSON和JS中的JSON，梳理了一遍，也对里面的细节和注意点进行了一次遍历，知道JSON是一种语法上衍生于JS语言的一种轻量级的数据交换格式，也明白了JSON相对于一般的JS数据结构（尤其是对象）的差别，更进一步，仔细地讨论了JS中关于JSON处理的3个函数和细节。</p>
+
+<p>不过遗憾的是，以上所用的3个函数，不兼容IE7以及IE7之前的浏览器。有关兼容性的讨论，留待之后吧。如果想直接在应用上解决兼容性，那么可以套用JSON官方的js，可以解决。</p>
+</article>
+                <section class="author">
+                    <div class="avatar" style="background-image: url(/images/avatar1.jpg);"></div>
+                    <a class="name" href="/about.me.html">Paparadise</a>
+                    <div class="intro">不要看轻前端职业，更不要看轻自己</div>
+                </section>
+                <section class="recommend">
+                    
+                    <section class="nav prev more">
+                        <div class="head">上篇文章</div>
+                        <a class="link" href="/%e6%89%93%e5%8c%85sea.js.html">打包sea.js</a>
+                    </section>
+                    
+                    
+                    <section class="nav next more">
+                        <div class="head">下篇文章</div>
+                        <a class="link" href="/%e7%90%86%e8%a7%a3promise.html">理解promise</a>
+                    </section>
+                    
+                </section>
+                
+    <section id="disqus_thread"></section>
+    <script type="text/javascript">
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//Paparadise.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+            </article>
+        </article>
+        <footer class="footer">
+    <span class="copyright">
+        Paparadise ©
+        <script type="text/javascript">
+            document.write(new Date().getFullYear());
+        </script>
+    </span>
+    <span class="publish">Powered by <a href="http://www.chole.io/" target="_blank">Ink</a></span>
+</footer>
+
+        <script src="/bundle/index.js"></script>
+    </body>
+</html>
